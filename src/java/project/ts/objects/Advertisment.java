@@ -1,5 +1,7 @@
 package project.ts.objects;
 
+import java.awt.Image;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -18,10 +20,10 @@ public class Advertisment {
     private int carMileage;
     private boolean demaged;
     private String vin;
-    private String image;
+    private Image image;
     private String description;
 
-    public Advertisment(int idAdvertisment, int idUser, int idCar, int carMileage, boolean demaged, String vin, String image, String description) {
+    public Advertisment(int idAdvertisment, int idUser, int idCar, int carMileage, boolean demaged, String vin, Image image, String description) {
         this.idAdvertisment = idAdvertisment;
         this.idUser = idUser;
         this.idCar = idCar;
@@ -31,6 +33,18 @@ public class Advertisment {
         this.image = image;
         this.description = description;
     }
+
+    public Advertisment(int idAdvertisment, int idUser, int idCar, int carMileage, boolean demaged, String vin, String description) {
+        this.idAdvertisment = idAdvertisment;
+        this.idUser = idUser;
+        this.idCar = idCar;
+        this.carMileage = carMileage;
+        this.demaged = demaged;
+        this.vin = vin;
+        this.description = description;
+    }
+    
+    
 
     public int getIdAdvertisment() {
         return idAdvertisment;
@@ -80,11 +94,11 @@ public class Advertisment {
         this.vin = vin;
     }
 
-    public String getImage() {
+    public Image getImage() {
         return image;
     }
 
-    public void setImage(String image) {
+    public void setImage(Image image) {
         this.image = image;
     }
 
