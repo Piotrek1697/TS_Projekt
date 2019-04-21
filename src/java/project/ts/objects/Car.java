@@ -35,6 +35,10 @@ public class Car {
         this.doors = doors;
     }
 
+    public Car() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     public int getIdCar() {
         return idCar;
     }
