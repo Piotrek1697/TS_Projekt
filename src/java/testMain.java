@@ -35,12 +35,12 @@ public class testMain {
         
         Advertisment advertisment1 = new Advertisment(1,user1,car1,50005,false,"437984738",null,null);
         Advertisment advertisment2 = new Advertisment(2,user3,car2,150005,true,"432294738",null,null);
-        //addao.addAdvertisment(advertisment2);
+        addao.addAdvertisment(advertisment2);
         //addao.deleteAdvertisment(3);
-        addao.getAdvertisments();
+        //addao.getAdvertisments();
         
             
-        //userdao.addUser(user1);
+        
         //userdao.addUser(user2);
         
         //System.out.println("User: " + userdao.getUser(2).toString());

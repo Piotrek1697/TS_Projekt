@@ -29,7 +29,7 @@ public class UserDAOImpl implements UserDAO {
         try {
             Connection connection = DbUtil.getConnection();
             resultSet = connection.createStatement().executeQuery(sql);
-            //connection.close();
+            connection.close();
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }

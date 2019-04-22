@@ -20,10 +20,10 @@ public class Advertisment {
     private int carMileage;
     private boolean demaged;
     private String vin;
-    private String image;
+    private Image image;
     private String description;
 
-    public Advertisment(int idAdvertisment, User idUser, Car idCar, int carMileage, boolean demaged, String vin, String image, String description) {
+    public Advertisment(int idAdvertisment, User idUser, Car idCar, int carMileage, boolean demaged, String vin, Image image, String description) {
         this.idAdvertisment = idAdvertisment;
         this.idUser = idUser;
         this.idCar = idCar;
@@ -92,11 +92,11 @@ public class Advertisment {
         this.vin = vin;
     }
 
-    public String getImage() {
+    public Image getImage() {
         return image;
     }
 
-    public void setImage(String image) {
+    public void setImage(Image image) {
         this.image = image;
     }
 

@@ -7,9 +7,6 @@ package project.ts.dao.classes;
 
 import db.DbUtil;
 import java.awt.Toolkit;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -73,24 +70,21 @@ public class AdvertismentDAOImpl implements AdvertismentDAO{
                 resultSet.getInt("przebieg"),
                 resultSet.getBoolean("uszkodzony"),
                 resultSet.getString("VIN"),
-                resultSet.getBlob("zdjecie").getBytes(1, (int)resultSet.getBlob("zdjecie").length()).toString(),
+                Toolkit.getDefaultToolkit().createImage(resultSet.getBlob("zdjecie").getBytes(1, (int)resultSet.getBlob("zdjecie").length())),
                 resultSet.getString("opis")
         );
                
         return advertisment;
     }
       
-      private void preparedAdvertisment(PreparedStatement prepStat, Advertisment advertisment) throws SQLException, FileNotFoundException {
+      private void preparedAdvertisment(PreparedStatement prepStat, Advertisment advertisment) throws SQLException {
 
-        File file = new File(advertisment.getImage());
-        FileInputStream input = new FileInputStream(file);  
-          
         prepStat.setInt(1, advertisment.getIdCar().getIdCar()); //idCar to po prostu obiekt CAR. User to samo
         prepStat.setInt(2, advertisment.getIdUser().getIdUser());
         prepStat.setInt(3,advertisment.getCarMileage() );
         prepStat.setBoolean(4, advertisment.isDemaged());
         prepStat.setString(5,advertisment.getVin());
-        prepStat.setBinaryStream(6, input);
+        prepStat.setBlob(6, (Blob)advertisment.getImage());
         prepStat.setString(7,advertisment.getDescription());
         
         prepStat.executeUpdate();
@@ -108,8 +102,6 @@ public class AdvertismentDAOImpl implements AdvertismentDAO{
 
         } catch (SQLException ex) {
             Logger.getLogger(CarDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(AdvertismentDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
@@ -160,8 +152,6 @@ public class AdvertismentDAOImpl implements AdvertismentDAO{
 
         } catch (SQLException ex) {
             Logger.getLogger(CarDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(AdvertismentDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
