@@ -18,8 +18,10 @@ public interface CarDAO {
     
     void updateCar(Car car);
     
-    void deleteCar(Car car);
+    void deleteCar(int idCar);
     
+    List<Car> getBrandCars(String brand);
     
+    List<Car> getBrandModel(String brand, String model);
     
 }

@@ -18,12 +18,14 @@ public class DbUtil {
     private static DbUtil dbUtil;
     private static BasicDataSource ds;
     
-    private DbUtil(){
+    public DbUtil(){
         ds = new BasicDataSource();
-        ds.setUrl("jdbc:mysql://localhost:3306/lab7?useSSL=false&serverTimezone=UTC");
+        ds.setUrl("jdbc:mysql://localhost:3306/komis_samochodowy?useSSL=false&serverTimezone=UTC");
+        //ds.setUrl("jdbc:mysql://localhost:3306/lab7?useSSL=false&serverTimezone=UTC");
         ds.setDriverClassName("com.mysql.cj.jdbc.Driver");
         ds.setUsername("root");
-        ds.setPassword("toor");
+        //ds.setPassword("toor");
+        ds.setPassword("Donepex1");
     }
     
     public static Connection getConnection() throws SQLException{

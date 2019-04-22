@@ -15,15 +15,15 @@ import java.awt.Image;
 public class Advertisment {
     
     private int idAdvertisment;
-    private int idUser;
-    private int idCar;
+    private User idUser;
+    private Car idCar;
     private int carMileage;
     private boolean demaged;
     private String vin;
     private Image image;
     private String description;
 
-    public Advertisment(int idAdvertisment, int idUser, int idCar, int carMileage, boolean demaged, String vin, Image image, String description) {
+    public Advertisment(int idAdvertisment, User idUser, Car idCar, int carMileage, boolean demaged, String vin, Image image, String description) {
         this.idAdvertisment = idAdvertisment;
         this.idUser = idUser;
         this.idCar = idCar;
@@ -34,7 +34,7 @@ public class Advertisment {
         this.description = description;
     }
 
-    public Advertisment(int idAdvertisment, int idUser, int idCar, int carMileage, boolean demaged, String vin, String description) {
+    public Advertisment(int idAdvertisment, User idUser, Car idCar, int carMileage, boolean demaged, String vin, String description) {
         this.idAdvertisment = idAdvertisment;
         this.idUser = idUser;
         this.idCar = idCar;
@@ -42,9 +42,7 @@ public class Advertisment {
         this.demaged = demaged;
         this.vin = vin;
         this.description = description;
-    }
-    
-    
+    }   
 
     public int getIdAdvertisment() {
         return idAdvertisment;
@@ -54,19 +52,19 @@ public class Advertisment {
         this.idAdvertisment = idAdvertisment;
     }
 
-    public int getIdUser() {
+    public User getIdUser() {
         return idUser;
     }
 
-    public void setIdUser(int idUser) {
+    public void setIdUser(User idUser) {
         this.idUser = idUser;
     }
 
-    public int getIdCar() {
+    public Car getIdCar() {
         return idCar;
     }
 
-    public void setIdCar(int idCar) {
+    public void setIdCar(Car idCar) {
         this.idCar = idCar;
     }
 

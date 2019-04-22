@@ -36,7 +36,6 @@ public class Car {
     }
 
     public Car() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     public int getIdCar() {
@@ -136,6 +135,12 @@ public class Car {
         return true;
     }
 
+    @Override
+    public String toString() {
+        return "Car{" + "idCar=" + idCar + ", brand=" + brand + ", model=" + model + ", yearOfProduction=" + yearOfProduction + ", fuelType=" + fuelType + ", engineCapacity=" + engineCapacity + ", horsepower=" + horsepower + ", doors=" + doors + '}';
+    }
+
+    
 
     
     
