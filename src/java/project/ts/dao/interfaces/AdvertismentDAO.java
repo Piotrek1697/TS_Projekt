@@ -14,7 +14,7 @@ import project.ts.objects.Advertisment;
  */
 public interface AdvertismentDAO {
     
-    void addAdvertisment (Advertisment advertisment);
+   void addAdvertisment (Advertisment advertisment);
     
     Advertisment getAdvertisment(int idAdvertisment);
     
@@ -23,6 +23,10 @@ public interface AdvertismentDAO {
     void updateAdvertisment(Advertisment advertisment);
     
     void deleteAdvertisment(int idAdvertisment);
+    
+    List<Advertisment> getBrandAdvertisment(String brand);
+    
+    List<Advertisment> getBrandModalAdvertisment(String brand, String model);
     
     
 }

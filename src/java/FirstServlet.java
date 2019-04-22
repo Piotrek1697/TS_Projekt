@@ -32,6 +32,7 @@ public class FirstServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        /*
         try {
             request.setAttribute("bookList", getBooks());
         } catch (ClassNotFoundException | SQLException ex) {
@@ -39,14 +40,16 @@ public class FirstServlet extends HttpServlet {
             response.sendError(500);
         } 
         request.getRequestDispatcher("index.jsp").forward(request, response);
+        */
+        
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        //response.sendRedirect("adverts.jsp");
     }
- 
+ /*
     private List<Book> getBooks() throws ClassNotFoundException, SQLException {
 
         List<Book> bookList = null;
@@ -71,4 +74,5 @@ public class FirstServlet extends HttpServlet {
         }
         return bookList;
     }
+*/
 }

@@ -23,6 +23,7 @@ import project.ts.dao.interfaces.AdvertismentDAO;
 import project.ts.dao.interfaces.CarDAO;
 import project.ts.dao.interfaces.UserDAO;
 import project.ts.objects.Advertisment;
+import project.ts.objects.Car;
 
 /**
  *
@@ -160,4 +161,45 @@ public class AdvertismentDAOImpl implements AdvertismentDAO {
         executeModifyQuery(sql);
     }
 
+    @Override
+    public List<Advertisment> getBrandAdvertisment(String brand) {
+        List<Advertisment> listOfBrandAdvertisment = new ArrayList();
+        String sql = "SELECT id_ogloszenie,samochod,uzytkownik,przebieg,uszkodzony,VIN,zdjecie,opis,cena FROM ogloszenie right JOIN samochod ON ogloszenie.samochod = samochod.id_samochod where marka= '" + brand + "';";
+
+        try {
+            Connection connection = DbUtil.getIstance().getConnection();
+            ResultSet resultSet = connection.createStatement().executeQuery(sql);
+            while (resultSet.next()) {
+                listOfBrandAdvertisment.add(wrapInAdvertisment(resultSet));
+            }
+            connection.close();
+            resultSet.close();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } catch (IOException ex) {
+            Logger.getLogger(AdvertismentDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listOfBrandAdvertisment;
+    }
+
+    @Override
+    public List<Advertisment> getBrandModalAdvertisment(String brand, String model) {
+        List<Advertisment> listOfBrandModelAdvertisment = new ArrayList();
+        String sql = "SELECT id_ogloszenie,samochod,uzytkownik,przebieg,uszkodzony,VIN,zdjecie,opis,cena FROM ogloszenie right JOIN samochod ON ogloszenie.samochod = samochod.id_samochod where marka = '" + brand + "' AND model = '" + model + "';";
+
+        try {
+            Connection connection = DbUtil.getIstance().getConnection();
+            ResultSet resultSet = connection.createStatement().executeQuery(sql);
+            while (resultSet.next()) {
+                listOfBrandModelAdvertisment.add(wrapInAdvertisment(resultSet));
+            }
+            connection.close();
+            resultSet.close();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } catch (IOException ex) {
+            Logger.getLogger(AdvertismentDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listOfBrandModelAdvertisment;
+    }
 }

@@ -2,6 +2,14 @@ package project.ts.objects;
 
 import java.awt.Image;
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import sun.misc.BASE64Encoder;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -24,6 +32,7 @@ public class Advertisment {
     private BufferedImage image;
     private String description;
     private double price;
+    private String base64Image;
 
     public Advertisment(int idAdvertisment, User idUser, Car idCar, int carMileage, boolean demaged, String vin, BufferedImage image, String description, double price) {
         this.idAdvertisment = idAdvertisment;
@@ -35,6 +44,7 @@ public class Advertisment {
         this.image = image;
         this.description = description;
         this.price = price;
+        this.base64Image = getBase64Image();
     }
 
     public Advertisment(int idAdvertisment, User idUser, Car idCar, int carMileage, boolean demaged, String vin, String description, double price) {
@@ -46,6 +56,7 @@ public class Advertisment {
         this.vin = vin;
         this.description = description;
         this.price = price;
+        this.base64Image = getBase64Image();
     }   
 
     public double getPrice() {
@@ -106,6 +117,23 @@ public class Advertisment {
 
     public BufferedImage getImage() {
         return image;
+    }
+    
+    public String getBase64Image(){
+        String imageString = null;
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        try {
+            ImageIO.write(image, "png", baos);
+            byte[] imageBytes = baos.toByteArray();
+ 
+            BASE64Encoder encoder = new BASE64Encoder();
+            imageString = encoder.encode(imageBytes);
+ 
+            baos.close();
+        } catch (IOException ex) {
+            Logger.getLogger(Advertisment.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return imageString;
     }
 
     public void setImage(BufferedImage image) {
