@@ -23,8 +23,7 @@ import project.ts.objects.User;
  * @author Rozma
  */
 public class UserDAOImpl implements UserDAO {
-    
-       
+
     private void executeModifyQuery(String sql) {
         ResultSet resultSet = null;
         try {
@@ -36,7 +35,7 @@ public class UserDAOImpl implements UserDAO {
         }
     }
 
-      private User wrapInUser (ResultSet resultSet) throws SQLException {
+    private User wrapInUser(ResultSet resultSet) throws SQLException {
         User user = null;
 
         user = new User(
@@ -46,25 +45,21 @@ public class UserDAOImpl implements UserDAO {
                 resultSet.getString("login"),
                 resultSet.getString("haslo")
         );
-               
+
         return user;
     }
-      
-        private void preparedUser(PreparedStatement prepStat, User user) throws SQLException {
+
+    private void preparedUser(PreparedStatement prepStat, User user) throws SQLException {
 
         prepStat.setString(1, user.getName());
         prepStat.setString(2, user.getSurname());
         prepStat.setString(3, user.getLogin());
         prepStat.setString(4, user.getPassword());
-     
+
         prepStat.executeUpdate();
         prepStat.close();
     }
-    
-    
-    
-    
-    
+
     @Override
     public void addUser(User user) {
         String sql = "INSERT INTO uzytkownik(imie,nazwisko,login,haslo)values(?,?,?,?)";
@@ -82,11 +77,11 @@ public class UserDAOImpl implements UserDAO {
     public User getUser(int idUser) {
         User user = null;
         String sql = "SELECT * FROM uzytkownik WHERE id_uzytkownik = '" + idUser + "';";
-       
+
         try {
             Connection connection = DbUtil.getIstance().getConnection();
             ResultSet resultSet = connection.createStatement().executeQuery(sql);
-            
+
             while (resultSet.next()) {
                 user = wrapInUser(resultSet);
             }
@@ -101,13 +96,13 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public List<User> getUsers() {
-      List<User> listOfUsers = new ArrayList();
-      String sql = "SELECT * FROM uzytkownik";
-        
+        List<User> listOfUsers = new ArrayList();
+        String sql = "SELECT * FROM uzytkownik";
+
         try {
             Connection connection = DbUtil.getIstance().getConnection();
             ResultSet resultSet = connection.createStatement().executeQuery(sql);
-                        
+
             while (resultSet.next()) {
                 listOfUsers.add(wrapInUser(resultSet));
             }
@@ -116,13 +111,13 @@ public class UserDAOImpl implements UserDAO {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-        
-      return listOfUsers; 
+
+        return listOfUsers;
     }
 
     @Override
     public void updateUser(User user) {
-       String sql = "UPDATE uzytkownik SET imie = ?,nazwisko = ?,login = ?,haslo = ? WHERE id_uzytkownik = '" + user.getIdUser() + "';";
+        String sql = "UPDATE uzytkownik SET imie = ?,nazwisko = ?,login = ?,haslo = ? WHERE id_uzytkownik = '" + user.getIdUser() + "';";
 
         try {
             Connection connection = DbUtil.getIstance().getConnection();
@@ -140,6 +135,5 @@ public class UserDAOImpl implements UserDAO {
         String sql = "DELETE FROM uzytkownik WHERE id_uzytkownik = '" + idUser + "'";
         executeModifyQuery(sql);
     }
-    
-    
+
 }

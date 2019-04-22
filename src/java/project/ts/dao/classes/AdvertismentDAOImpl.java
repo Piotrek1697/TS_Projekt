@@ -6,12 +6,10 @@
 package project.ts.dao.classes;
 
 import db.DbUtil;
-import java.awt.Toolkit;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -25,23 +23,21 @@ import project.ts.dao.interfaces.AdvertismentDAO;
 import project.ts.dao.interfaces.CarDAO;
 import project.ts.dao.interfaces.UserDAO;
 import project.ts.objects.Advertisment;
-import project.ts.objects.User;
 
 /**
  *
  * @author Rozma
  */
-public class AdvertismentDAOImpl implements AdvertismentDAO{
+public class AdvertismentDAOImpl implements AdvertismentDAO {
 
-    CarDAO cardao; 
-    UserDAO userdao;
+    private CarDAO carDao;
+    private UserDAO userDao;
 
     public AdvertismentDAOImpl(CarDAO cardao, UserDAO userdao) {
-        this.cardao = cardao;
-        this.userdao = userdao;
+        this.carDao = cardao;
+        this.userDao = userdao;
     }
-    
-    
+
     private void executeModifyQuery(String sql) {
         ResultSet resultSet = null;
         try {
@@ -53,13 +49,13 @@ public class AdvertismentDAOImpl implements AdvertismentDAO{
         }
     }
 
-      private Advertisment wrapInAdvertisment (ResultSet resultSet) throws SQLException, IOException {
+    private Advertisment wrapInAdvertisment(ResultSet resultSet) throws SQLException, IOException {
         Advertisment advertisment = null;
 
         advertisment = new Advertisment(
                 resultSet.getInt("id_ogloszenie"),
-                userdao.getUser(resultSet.getInt("uzytkownik")),
-                cardao.getCar(resultSet.getInt("samochod")),
+                userDao.getUser(resultSet.getInt("uzytkownik")),
+                carDao.getCar(resultSet.getInt("samochod")),
                 resultSet.getInt("przebieg"),
                 resultSet.getBoolean("uszkodzony"),
                 resultSet.getString("VIN"),
@@ -67,34 +63,33 @@ public class AdvertismentDAOImpl implements AdvertismentDAO{
                 resultSet.getString("opis"),
                 resultSet.getDouble("cena")
         );
-               
+
         return advertisment;
     }
-      
-      private void preparedAdvertisment(PreparedStatement prepStat, Advertisment advertisment) throws SQLException, IOException {
+
+    private void preparedAdvertisment(PreparedStatement prepStat, Advertisment advertisment) throws SQLException, IOException {
 
         prepStat.setInt(1, advertisment.getIdCar().getIdCar()); //idCar to po prostu obiekt CAR. User to samo
         prepStat.setInt(2, advertisment.getIdUser().getIdUser());
-        prepStat.setInt(3,advertisment.getCarMileage() );
+        prepStat.setInt(3, advertisment.getCarMileage());
         prepStat.setBoolean(4, advertisment.isDemaged());
-        prepStat.setString(5,advertisment.getVin());
-        
+        prepStat.setString(5, advertisment.getVin());
+
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         ImageIO.write(advertisment.getImage(), "png", baos);
         InputStream is = new ByteArrayInputStream(baos.toByteArray());
-        
+
         prepStat.setBlob(6, is);
-        prepStat.setString(7,advertisment.getDescription());
+        prepStat.setString(7, advertisment.getDescription());
         prepStat.setDouble(8, advertisment.getPrice());
-        
+
         prepStat.executeUpdate();
         prepStat.close();
     }
-      
-      
+
     @Override
     public void addAdvertisment(Advertisment advertisment) {
-            String sql = "INSERT INTO ogloszenie(uzytkownik,samochod,przebieg,uszkodzony,VIN,zdjecie,opis,cena)values(?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO ogloszenie(uzytkownik,samochod,przebieg,uszkodzony,VIN,zdjecie,opis,cena)values(?,?,?,?,?,?,?,?)";
         try {
             Connection connection = DbUtil.getIstance().getConnection();
             PreparedStatement prepStat = connection.prepareStatement(sql);
@@ -104,13 +99,12 @@ public class AdvertismentDAOImpl implements AdvertismentDAO{
             Logger.getLogger(CarDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
 
     @Override
     public Advertisment getAdvertisment(int idAdvertisment) {
         Advertisment advertisment = null;
         String sql = "SELECT * FROM ogloszenie WHERE id_ogloszenie = '" + idAdvertisment + "';";
-        
+
         try {
             Connection connection = DbUtil.getIstance().getConnection();
             ResultSet resultSet = connection.createStatement().executeQuery(sql);
@@ -121,16 +115,16 @@ public class AdvertismentDAOImpl implements AdvertismentDAO{
             resultSet.close();
         } catch (SQLException | IOException e) {
             System.out.println(e.getMessage());
-        } 
+        }
 
         return advertisment;
     }
 
     @Override
     public List<Advertisment> getAdvertisments() {
-      List<Advertisment> listOfAdvertisments = new ArrayList();
-      String sql = "SELECT * FROM ogloszenie";
-      
+        List<Advertisment> listOfAdvertisments = new ArrayList();
+        String sql = "SELECT * FROM ogloszenie";
+
         try {
             Connection connection = DbUtil.getIstance().getConnection();
             ResultSet resultSet = connection.createStatement().executeQuery(sql);
@@ -142,14 +136,13 @@ public class AdvertismentDAOImpl implements AdvertismentDAO{
         } catch (SQLException | IOException e) {
             System.out.println(e.getMessage());
         }
-        
-      return listOfAdvertisments; 
+
+        return listOfAdvertisments;
     }
-    
 
     @Override
     public void updateAdvertisment(Advertisment advertisment) {
-          String sql = "UPDATE ogloszenie SET samochod = ?,uzytkownik = ?,przebieg = ?,uszkodzony = ?, VIN = ?, zdjecie = ?, opis = ?, cena = ? WHERE id_ogloszenie = '" + advertisment.getIdAdvertisment() + "';";
+        String sql = "UPDATE ogloszenie SET samochod = ?,uzytkownik = ?,przebieg = ?,uszkodzony = ?, VIN = ?, zdjecie = ?, opis = ?, cena = ? WHERE id_ogloszenie = '" + advertisment.getIdAdvertisment() + "';";
 
         try {
             Connection connection = DbUtil.getIstance().getConnection();
@@ -163,8 +156,8 @@ public class AdvertismentDAOImpl implements AdvertismentDAO{
 
     @Override
     public void deleteAdvertisment(int idAdvertisment) {
-       String sql = "DELETE FROM ogloszenie WHERE id_ogloszenie = '" + idAdvertisment + "'";
+        String sql = "DELETE FROM ogloszenie WHERE id_ogloszenie = '" + idAdvertisment + "'";
         executeModifyQuery(sql);
     }
-    
+
 }

@@ -24,7 +24,6 @@ import project.ts.objects.Car;
  */
 public class CarDAOImpl implements CarDAO {
 
-
     private void executeModifyQuery(String sql) {
         ResultSet resultSet = null;
         try {
@@ -85,7 +84,7 @@ public class CarDAOImpl implements CarDAO {
     public Car getCar(int idCar) {
         Car car = null;
         String sql = "SELECT * FROM SAMOCHOD WHERE id_samochod = '" + idCar + "';";
-        
+
         try {
             Connection connection = DbUtil.getIstance().getConnection();
             ResultSet resultSet = connection.createStatement().executeQuery(sql);
@@ -105,7 +104,7 @@ public class CarDAOImpl implements CarDAO {
     public List<Car> getCars() {
         List<Car> listOfCars = new ArrayList();
         String sql = "SELECT *FROM SAMOCHOD";
-        
+
         try {
             Connection connection = DbUtil.getIstance().getConnection();
             ResultSet resultSet = connection.createStatement().executeQuery(sql);
@@ -146,7 +145,7 @@ public class CarDAOImpl implements CarDAO {
     public List<Car> getBrandCars(String brand) {
         List<Car> listOfBrandCars = new ArrayList();
         String sql = "select * from samochod where marka = '" + brand + "';";
-        
+
         try {
             Connection connection = DbUtil.getIstance().getConnection();
             ResultSet resultSet = connection.createStatement().executeQuery(sql);
@@ -165,7 +164,7 @@ public class CarDAOImpl implements CarDAO {
     public List<Car> getBrandModel(String brand, String model) {
         List<Car> listOfBrandModel = new ArrayList();
         String sql = "select * from samochod where marka = '" + brand + "' AND model = '" + model + "';";
-        
+
         try {
             Connection connection = DbUtil.getIstance().getConnection();
             ResultSet resultSet = connection.createStatement().executeQuery(sql);
