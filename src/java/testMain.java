@@ -1,8 +1,11 @@
 
 import db.DbUtil;
 import project.ts.dao.classes.CarDAOImpl;
+import project.ts.dao.classes.UserDAOImpl;
 import project.ts.dao.interfaces.CarDAO;
+import project.ts.dao.interfaces.UserDAO;
 import project.ts.objects.Car;
+import project.ts.objects.User;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -22,8 +25,20 @@ public class testMain {
         Car car2 = new Car(2, "BMW", "X6", 2015, "petrol", 2998.5, 363, 5);
         DbUtil db = new DbUtil();
         CarDAO cardao = new CarDAOImpl();
+        UserDAO userdao = new UserDAOImpl();
+        
+        User user1 = new User(1,"Adam","Rozmarynowski","Rozmek320","jamniczek");
+        User user2 = new User(2,"Piotr","Janus","Pjanus420","audir8");
+        User user3 = new User(4,"Piotr","Janus","Pjanus420","audir8v10");        
+        //userdao.addUser(user1);
+        //userdao.addUser(user2);
+        
+        System.out.println("User: " + userdao.getUser(2).toString());
+        //userdao.updateUser(user3);
+        System.out.println(userdao.getUsers().toString());
+
         //cardao.addCar(car1);
-        System.out.println("Print: " + cardao.getCar(2).toString());
+        //System.out.println("Print: " + cardao.getCar(2).toString());
         
         //for(Car car : cardao.getCars()){
         //System.out.println("Print Array " + car.toString()); 
@@ -32,8 +47,8 @@ public class testMain {
         //cardao.updateCar(car2);
         //System.out.println("Print UPDATE: " + cardao.getCar(2).toString());
         //cardao.deleteCar(3);
-        System.out.println("Only BMW" + cardao.getBrandCars("BMW"));
-        System.out.println("Only BMW X5" + cardao.getBrandModel("BMW","X5"));
+        //System.out.println("Only BMW" + cardao.getBrandCars("BMW"));
+        //System.out.println("Only BMW X5" + cardao.getBrandModel("BMW","X5"));
     }
             
     

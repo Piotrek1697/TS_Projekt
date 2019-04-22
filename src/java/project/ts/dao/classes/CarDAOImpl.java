@@ -133,7 +133,6 @@ public class CarDAOImpl implements CarDAO {
         try {
             Connection connection = DbUtil.getConnection();
             PreparedStatement prepStat = connection.prepareStatement(sql);
-
             preparedCar(prepStat, car);
 
         } catch (SQLException ex) {

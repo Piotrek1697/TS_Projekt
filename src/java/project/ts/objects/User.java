@@ -96,6 +96,11 @@ public class User {
         return true;
     }
 
+    @Override
+    public String toString() {
+        return "User{" + "idUser=" + idUser + ", name=" + name + ", surname=" + surname + ", login=" + login + ", password=" + password + '}';
+    }
+
     
     
     
