@@ -24,22 +24,11 @@ import project.ts.objects.Car;
  */
 public class CarDAOImpl implements CarDAO {
 
-    private ResultSet executeFetchQuery(String sql) {
-        ResultSet resultSet = null;
-        try {
-            Connection connection = DbUtil.getConnection();
-            resultSet = connection.createStatement().executeQuery(sql);
-            //connection.close();
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-        }
-        return resultSet;
-    }
 
     private void executeModifyQuery(String sql) {
         ResultSet resultSet = null;
         try {
-            Connection connection = DbUtil.getConnection();
+            Connection connection = DbUtil.getIstance().getConnection();
             connection.createStatement().execute(sql);
             connection.close();
         } catch (Exception ex) {
@@ -51,7 +40,7 @@ public class CarDAOImpl implements CarDAO {
     public void addCar(Car car) {
         String sql = "INSERT INTO SAMOCHOD (marka,model,rocznik,rodzaj_paliwa,poj_silnika,konie_mechaniczne,ilosc_drzwi)values(?,?,?,?,?,?,?)";
         try {
-            Connection connection = DbUtil.getConnection();
+            Connection connection = DbUtil.getIstance().getConnection();
             PreparedStatement prepStat = connection.prepareStatement(sql);
             preparedCar(prepStat, car);
 
@@ -96,11 +85,14 @@ public class CarDAOImpl implements CarDAO {
     public Car getCar(int idCar) {
         Car car = null;
         String sql = "SELECT * FROM SAMOCHOD WHERE id_samochod = '" + idCar + "';";
-        ResultSet resultSet = executeFetchQuery(sql);
+        
         try {
+            Connection connection = DbUtil.getIstance().getConnection();
+            ResultSet resultSet = connection.createStatement().executeQuery(sql);
             while (resultSet.next()) {
                 car = wrapInCar(resultSet);
             }
+            connection.close();
             resultSet.close();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -113,11 +105,14 @@ public class CarDAOImpl implements CarDAO {
     public List<Car> getCars() {
         List<Car> listOfCars = new ArrayList();
         String sql = "SELECT *FROM SAMOCHOD";
-        ResultSet resultSet = executeFetchQuery(sql);
+        
         try {
+            Connection connection = DbUtil.getIstance().getConnection();
+            ResultSet resultSet = connection.createStatement().executeQuery(sql);
             while (resultSet.next()) {
                 listOfCars.add(wrapInCar(resultSet));
             }
+            connection.close();
             resultSet.close();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -131,7 +126,7 @@ public class CarDAOImpl implements CarDAO {
         String sql = "UPDATE samochod SET marka = ?,model = ?,rocznik = ?,rodzaj_paliwa = ?, poj_silnika = ?,konie_mechaniczne = ?,ilosc_drzwi = ? WHERE id_samochod = '" + car.getIdCar() + "';";
 
         try {
-            Connection connection = DbUtil.getConnection();
+            Connection connection = DbUtil.getIstance().getConnection();
             PreparedStatement prepStat = connection.prepareStatement(sql);
             preparedCar(prepStat, car);
 
@@ -151,11 +146,14 @@ public class CarDAOImpl implements CarDAO {
     public List<Car> getBrandCars(String brand) {
         List<Car> listOfBrandCars = new ArrayList();
         String sql = "select * from samochod where marka = '" + brand + "';";
-        ResultSet resultSet = executeFetchQuery(sql);
+        
         try {
+            Connection connection = DbUtil.getIstance().getConnection();
+            ResultSet resultSet = connection.createStatement().executeQuery(sql);
             while (resultSet.next()) {
                 listOfBrandCars.add(wrapInCar(resultSet));
             }
+            connection.close();
             resultSet.close();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -167,11 +165,14 @@ public class CarDAOImpl implements CarDAO {
     public List<Car> getBrandModel(String brand, String model) {
         List<Car> listOfBrandModel = new ArrayList();
         String sql = "select * from samochod where marka = '" + brand + "' AND model = '" + model + "';";
-        ResultSet resultSet = executeFetchQuery(sql);
+        
         try {
+            Connection connection = DbUtil.getIstance().getConnection();
+            ResultSet resultSet = connection.createStatement().executeQuery(sql);
             while (resultSet.next()) {
                 listOfBrandModel.add(wrapInCar(resultSet));
             }
+            connection.close();
             resultSet.close();
         } catch (SQLException e) {
             System.out.println(e.getMessage());

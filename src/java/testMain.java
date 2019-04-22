@@ -28,7 +28,6 @@ public class testMain {
         User user3 = new User(4,"Piotr","Janus","Pjanus420","audir8v10"); 
         Car car1 = new Car(1, "BMW", "X5", 2015, "petrol", 2998.5, 263, 5);
         Car car2 = new Car(2, "BMW", "X6", 2015, "petrol", 2998.5, 363, 5);
-        DbUtil db = new DbUtil();
         CarDAO cardao = new CarDAOImpl();
         UserDAO userdao = new UserDAOImpl();
         AdvertismentDAO addao = new AdvertismentDAOImpl(cardao,userdao);
@@ -38,15 +37,15 @@ public class testMain {
         addao.addAdvertisment(advertisment2);
         //addao.deleteAdvertisment(3);
         //addao.getAdvertisments();
-        
+        //System.out.println(userdao.getUsers());
             
         
         //userdao.addUser(user2);
         
-        //System.out.println("User: " + userdao.getUser(2).toString());
+        System.out.println("User: " + userdao.getUser(2).toString());
         //userdao.updateUser(user3);
-        //System.out.println(userdao.getUsers().toString());
-
+        System.out.println(userdao.getUsers().toString());
+          
         //cardao.addCar(car1);
         //System.out.println("Print: " + cardao.getCar(2).toString());
         

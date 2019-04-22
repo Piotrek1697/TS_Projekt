@@ -37,22 +37,10 @@ public class AdvertismentDAOImpl implements AdvertismentDAO{
     }
     
     
-    private ResultSet executeFetchQuery(String sql) {
-        ResultSet resultSet = null;
-        try {
-            Connection connection = DbUtil.getConnection();
-            resultSet = connection.createStatement().executeQuery(sql);
-            //connection.close();
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-        }
-        return resultSet;
-    }
-    
     private void executeModifyQuery(String sql) {
         ResultSet resultSet = null;
         try {
-            Connection connection = DbUtil.getConnection();
+            Connection connection = DbUtil.getIstance().getConnection();
             connection.createStatement().execute(sql);
             connection.close();
         } catch (Exception ex) {
@@ -96,7 +84,7 @@ public class AdvertismentDAOImpl implements AdvertismentDAO{
     public void addAdvertisment(Advertisment advertisment) {
             String sql = "INSERT INTO ogloszenie(uzytkownik,samochod,przebieg,uszkodzony,VIN,zdjecie,opis)values(?,?,?,?,?,?,?)";
         try {
-            Connection connection = DbUtil.getConnection();
+            Connection connection = DbUtil.getIstance().getConnection();
             PreparedStatement prepStat = connection.prepareStatement(sql);
             preparedAdvertisment(prepStat, advertisment);
 
@@ -108,13 +96,16 @@ public class AdvertismentDAOImpl implements AdvertismentDAO{
 
     @Override
     public Advertisment getAdvertisment(int idAdvertisment) {
-       Advertisment advertisment = null;
+        Advertisment advertisment = null;
         String sql = "SELECT * FROM ogloszenie WHERE id_ogloszenie = '" + idAdvertisment + "';";
-        ResultSet resultSet = executeFetchQuery(sql);
+        
         try {
+            Connection connection = DbUtil.getIstance().getConnection();
+            ResultSet resultSet = connection.createStatement().executeQuery(sql);
             while (resultSet.next()) {
                 advertisment = wrapInAdvertisment(resultSet);
             }
+            connection.close();
             resultSet.close();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -127,11 +118,14 @@ public class AdvertismentDAOImpl implements AdvertismentDAO{
     public List<Advertisment> getAdvertisments() {
       List<Advertisment> listOfAdvertisments = new ArrayList();
       String sql = "SELECT * FROM ogloszenie";
-      ResultSet resultSet = executeFetchQuery(sql);
+      
         try {
+            Connection connection = DbUtil.getIstance().getConnection();
+            ResultSet resultSet = connection.createStatement().executeQuery(sql);
             while (resultSet.next()) {
                 listOfAdvertisments.add(wrapInAdvertisment(resultSet));
             }
+            connection.close();
             resultSet.close();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -146,7 +140,7 @@ public class AdvertismentDAOImpl implements AdvertismentDAO{
           String sql = "UPDATE ogloszenie SET samochod = ?,uzytkownik = ?,przebieg = ?,uszkodzony = ?, VIN = ?, zdjecie = ?,opis = ? WHERE id_ogloszenie = '" + advertisment.getIdAdvertisment() + "';";
 
         try {
-            Connection connection = DbUtil.getConnection();
+            Connection connection = DbUtil.getIstance().getConnection();
             PreparedStatement prepStat = connection.prepareStatement(sql);
             preparedAdvertisment(prepStat, advertisment);
 
