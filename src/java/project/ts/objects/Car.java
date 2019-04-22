@@ -35,6 +35,9 @@ public class Car {
         this.doors = doors;
     }
 
+    public Car() {
+    }
+
     public int getIdCar() {
         return idCar;
     }
@@ -132,6 +135,12 @@ public class Car {
         return true;
     }
 
+    @Override
+    public String toString() {
+        return "Car{" + "idCar=" + idCar + ", brand=" + brand + ", model=" + model + ", yearOfProduction=" + yearOfProduction + ", fuelType=" + fuelType + ", engineCapacity=" + engineCapacity + ", horsepower=" + horsepower + ", doors=" + doors + '}';
+    }
+
+    
 
     
     
