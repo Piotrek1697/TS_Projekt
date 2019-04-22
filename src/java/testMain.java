@@ -1,5 +1,11 @@
 
 import db.DbUtil;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import project.ts.dao.classes.AdvertismentDAOImpl;
 import project.ts.dao.classes.CarDAOImpl;
 import project.ts.dao.classes.UserDAOImpl;
@@ -32,14 +38,18 @@ public class testMain {
         UserDAO userdao = new UserDAOImpl();
         AdvertismentDAO addao = new AdvertismentDAOImpl(cardao,userdao);
         
-        Advertisment advertisment1 = new Advertisment(1,user1,car1,50005,false,"437984738",null,null);
-        Advertisment advertisment2 = new Advertisment(2,user3,car2,150005,true,"432294738",null,null);
-        addao.addAdvertisment(advertisment2);
+        BufferedImage bmw = null;
+        try {
+            bmw = ImageIO.read(new File("C:\\Users\\Piotr Janus\\Desktop\\pies.jpeg"));
+        } catch (IOException ex) {
+            Logger.getLogger(testMain.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Advertisment advertisment1 = new Advertisment(1,user1,car1,50005,false,"437984738",bmw,null,3000);
+        Advertisment advertisment2 = new Advertisment(2,user3,car2,150005,true,"432294738",null,null,2000);
+        addao.addAdvertisment(advertisment1);
         //addao.deleteAdvertisment(3);
         //addao.getAdvertisments();
         //System.out.println(userdao.getUsers());
-            
-        
         //userdao.addUser(user2);
         
         System.out.println("User: " + userdao.getUser(2).toString());

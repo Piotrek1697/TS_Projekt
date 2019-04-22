@@ -7,6 +7,10 @@ package project.ts.dao.classes;
 
 import db.DbUtil;
 import java.awt.Toolkit;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -16,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import project.ts.dao.interfaces.AdvertismentDAO;
 import project.ts.dao.interfaces.CarDAO;
 import project.ts.dao.interfaces.UserDAO;
@@ -48,7 +53,7 @@ public class AdvertismentDAOImpl implements AdvertismentDAO{
         }
     }
 
-      private Advertisment wrapInAdvertisment (ResultSet resultSet) throws SQLException {
+      private Advertisment wrapInAdvertisment (ResultSet resultSet) throws SQLException, IOException {
         Advertisment advertisment = null;
 
         advertisment = new Advertisment(
@@ -58,22 +63,29 @@ public class AdvertismentDAOImpl implements AdvertismentDAO{
                 resultSet.getInt("przebieg"),
                 resultSet.getBoolean("uszkodzony"),
                 resultSet.getString("VIN"),
-                Toolkit.getDefaultToolkit().createImage(resultSet.getBlob("zdjecie").getBytes(1, (int)resultSet.getBlob("zdjecie").length())),
-                resultSet.getString("opis")
+                ImageIO.read(resultSet.getBlob("zdjecie").getBinaryStream()),
+                resultSet.getString("opis"),
+                resultSet.getDouble("cena")
         );
                
         return advertisment;
     }
       
-      private void preparedAdvertisment(PreparedStatement prepStat, Advertisment advertisment) throws SQLException {
+      private void preparedAdvertisment(PreparedStatement prepStat, Advertisment advertisment) throws SQLException, IOException {
 
         prepStat.setInt(1, advertisment.getIdCar().getIdCar()); //idCar to po prostu obiekt CAR. User to samo
         prepStat.setInt(2, advertisment.getIdUser().getIdUser());
         prepStat.setInt(3,advertisment.getCarMileage() );
         prepStat.setBoolean(4, advertisment.isDemaged());
         prepStat.setString(5,advertisment.getVin());
-        prepStat.setBlob(6, (Blob)advertisment.getImage());
+        
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        ImageIO.write(advertisment.getImage(), "png", baos);
+        InputStream is = new ByteArrayInputStream(baos.toByteArray());
+        
+        prepStat.setBlob(6, is);
         prepStat.setString(7,advertisment.getDescription());
+        prepStat.setDouble(8, advertisment.getPrice());
         
         prepStat.executeUpdate();
         prepStat.close();
@@ -82,13 +94,13 @@ public class AdvertismentDAOImpl implements AdvertismentDAO{
       
     @Override
     public void addAdvertisment(Advertisment advertisment) {
-            String sql = "INSERT INTO ogloszenie(uzytkownik,samochod,przebieg,uszkodzony,VIN,zdjecie,opis)values(?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO ogloszenie(uzytkownik,samochod,przebieg,uszkodzony,VIN,zdjecie,opis,cena)values(?,?,?,?,?,?,?,?)";
         try {
             Connection connection = DbUtil.getIstance().getConnection();
             PreparedStatement prepStat = connection.prepareStatement(sql);
             preparedAdvertisment(prepStat, advertisment);
 
-        } catch (SQLException ex) {
+        } catch (SQLException | IOException ex) {
             Logger.getLogger(CarDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -107,9 +119,9 @@ public class AdvertismentDAOImpl implements AdvertismentDAO{
             }
             connection.close();
             resultSet.close();
-        } catch (SQLException e) {
+        } catch (SQLException | IOException e) {
             System.out.println(e.getMessage());
-        }
+        } 
 
         return advertisment;
     }
@@ -127,7 +139,7 @@ public class AdvertismentDAOImpl implements AdvertismentDAO{
             }
             connection.close();
             resultSet.close();
-        } catch (SQLException e) {
+        } catch (SQLException | IOException e) {
             System.out.println(e.getMessage());
         }
         
@@ -137,14 +149,14 @@ public class AdvertismentDAOImpl implements AdvertismentDAO{
 
     @Override
     public void updateAdvertisment(Advertisment advertisment) {
-          String sql = "UPDATE ogloszenie SET samochod = ?,uzytkownik = ?,przebieg = ?,uszkodzony = ?, VIN = ?, zdjecie = ?,opis = ? WHERE id_ogloszenie = '" + advertisment.getIdAdvertisment() + "';";
+          String sql = "UPDATE ogloszenie SET samochod = ?,uzytkownik = ?,przebieg = ?,uszkodzony = ?, VIN = ?, zdjecie = ?, opis = ?, cena = ? WHERE id_ogloszenie = '" + advertisment.getIdAdvertisment() + "';";
 
         try {
             Connection connection = DbUtil.getIstance().getConnection();
             PreparedStatement prepStat = connection.prepareStatement(sql);
             preparedAdvertisment(prepStat, advertisment);
 
-        } catch (SQLException ex) {
+        } catch (SQLException | IOException ex) {
             Logger.getLogger(CarDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

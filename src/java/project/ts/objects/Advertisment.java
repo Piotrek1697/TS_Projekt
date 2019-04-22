@@ -1,6 +1,7 @@
 package project.ts.objects;
 
 import java.awt.Image;
+import java.awt.image.BufferedImage;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -20,10 +21,11 @@ public class Advertisment {
     private int carMileage;
     private boolean demaged;
     private String vin;
-    private Image image;
+    private BufferedImage image;
     private String description;
+    private double price;
 
-    public Advertisment(int idAdvertisment, User idUser, Car idCar, int carMileage, boolean demaged, String vin, Image image, String description) {
+    public Advertisment(int idAdvertisment, User idUser, Car idCar, int carMileage, boolean demaged, String vin, BufferedImage image, String description, double price) {
         this.idAdvertisment = idAdvertisment;
         this.idUser = idUser;
         this.idCar = idCar;
@@ -32,9 +34,10 @@ public class Advertisment {
         this.vin = vin;
         this.image = image;
         this.description = description;
+        this.price = price;
     }
 
-    public Advertisment(int idAdvertisment, User idUser, Car idCar, int carMileage, boolean demaged, String vin, String description) {
+    public Advertisment(int idAdvertisment, User idUser, Car idCar, int carMileage, boolean demaged, String vin, String description, double price) {
         this.idAdvertisment = idAdvertisment;
         this.idUser = idUser;
         this.idCar = idCar;
@@ -42,8 +45,17 @@ public class Advertisment {
         this.demaged = demaged;
         this.vin = vin;
         this.description = description;
+        this.price = price;
     }   
 
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+    
     public int getIdAdvertisment() {
         return idAdvertisment;
     }
@@ -92,11 +104,11 @@ public class Advertisment {
         this.vin = vin;
     }
 
-    public Image getImage() {
+    public BufferedImage getImage() {
         return image;
     }
 
-    public void setImage(Image image) {
+    public void setImage(BufferedImage image) {
         this.image = image;
     }
 
