@@ -19,19 +19,28 @@
                 margin: 20px;
                 padding: 20px;
             }
+            .split-para      { display:block;
+                              margin:0px;}
+            .split-para span { 
+                display:block;
+                float:right;
+                width:81%;
+                margin-left:0px;
+                margin-bottom: 0px;
+            }
         </style>
     </head>
     <body>
         <c:forEach var="advert" items="${advertList}">
             <div class="advert">
-                <h2><c:out value="${advert.idCar.brand}"/>  <c:out value="${advert.idCar.model}"/>  
-                    <c:out value="${advert.idCar.yearOfProduction}"/></h2>
+                <h2 class="split-para"><c:out value="${advert.idCar.brand}"/>  <c:out value="${advert.idCar.model}"/>  
+                    <c:out value="${advert.idCar.yearOfProduction}"/>
+                    <span><img src="data:image/jpg;base64,${advert.base64Image}" width="20%" height="20%"/></span></h2>
+                    
                 <p><c:out value="${advert.idCar.fuelType}"/>  <c:out value="${advert.idCar.engineCapacity}"/>
                 <c:out value="${advert.idCar.horsepower} KM"/></p>
                 <p><c:out value="${advert.carMileage} km"/></p>
                 <h3><c:out value="${advert.price} zł"/></h3>
-                
-                <img src="data:image/jpg;base64,${advert.base64Image}" width="30%" height="30%"/>
                
             </div>
         </c:forEach>
