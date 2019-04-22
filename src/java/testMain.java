@@ -38,10 +38,13 @@ public class testMain {
         UserDAO userdao = new UserDAOImpl();
         AdvertismentDAO addao = new AdvertismentDAOImpl(cardao,userdao);
         
+        LoadImage loadImage = new LoadImage();
         BufferedImage bmw = null;
+       
         try {
-            bmw = ImageIO.read(new File("C:\\Users\\Piotr Janus\\Desktop\\pies.jpeg"));
-        } catch (IOException ex) {
+            bmw = ImageIO.read(new File("C:\\Users\\Rozma\\Documents\\GitHub\\TS_Projekt\\src\\java\\bmwx5.jpg"));
+            bmw = loadImage.scaleImage(bmw);
+                    } catch (IOException ex) {
             Logger.getLogger(testMain.class.getName()).log(Level.SEVERE, null, ex);
         }
         Advertisment advertisment1 = new Advertisment(1,user1,car1,50005,false,"437984738",bmw,null,3000);
@@ -52,9 +55,9 @@ public class testMain {
         //System.out.println(userdao.getUsers());
         //userdao.addUser(user2);
         
-        System.out.println("User: " + userdao.getUser(2).toString());
+        //System.out.println("User: " + userdao.getUser(2).toString());
         //userdao.updateUser(user3);
-        System.out.println(userdao.getUsers().toString());
+        //System.out.println(userdao.getUsers().toString());
           
         //cardao.addCar(car1);
         //System.out.println("Print: " + cardao.getCar(2).toString());
