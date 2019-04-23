@@ -24,6 +24,7 @@ import project.ts.dao.interfaces.CarDAO;
 import project.ts.dao.interfaces.UserDAO;
 import project.ts.objects.Advertisment;
 import project.ts.objects.Car;
+import project.ts.objects.User;
 
 /**
  *
@@ -71,8 +72,8 @@ public class AdvertismentDAOImpl implements AdvertismentDAO {
 
     private void preparedAdvertisment(PreparedStatement prepStat, Advertisment advertisment) throws SQLException, IOException {
 
-        prepStat.setInt(1, advertisment.getIdCar().getIdCar()); //idCar to po prostu obiekt CAR. User to samo
-        prepStat.setInt(2, advertisment.getIdUser().getIdUser());
+        prepStat.setInt(1, advertisment.getIdUser().getIdUser());
+        prepStat.setInt(2, advertisment.getIdCar().getIdCar()); //idCar to po prostu obiekt CAR. User to samo
         prepStat.setInt(3, advertisment.getCarMileage());
         prepStat.setBoolean(4, advertisment.isDemaged());
         prepStat.setString(5, advertisment.getVin());
