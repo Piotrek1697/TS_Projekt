@@ -9,45 +9,29 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Wyszukaj samochód</title>
+        <style>
+            
+            ::-webkit-input-placeholder {
+                font-style: italic;
+            }
+            :-moz-placeholder {
+                font-style: italic;  
+            }
+            ::-moz-placeholder {
+                font-style: italic;  
+            }
+            :-ms-input-placeholder {  
+                font-style: italic; 
+            }
+
+        </style>
     </head>
     <body>
-        <h2>Lista</h2>
-        <table style="width:50%" border="1">
-            <tr>
-                <th>ID</th>
-                <th>Tytul</th>
-                <th>Autor</th>
-                <th>ISBN</th>
-                <th>Status</th>
-                <th>Description</th>
-            </tr>
-            <c:forEach var="book" items="${bookList}">
-                <tr>
-                    <td><c:out value="${book.id}"/></td>
-                    <td><c:out value="${book.title}"/></td>
-                    <td><c:out value="${book.author}"/></td>
-                    <td><c:out value="${book.isbn}"/></td>
-                    <td><c:out value="${book.status}"/></td>
-                    <td><c:out value="${book.description}"/></td>
-            </tr>
-            </c:forEach>
-        </table>
-              
-              <form action="FirstServlet" method="POST">
-                  id: <input type="text" name="id"><br>
-                  title: <input type="text" name="title"><br>
-                  author: <input type="text" name="author"><br>
-                  isbn: <input type="text" name="isbn"><br>
-                  short description: <input type="text" name="desc"><br>
-                  <input type="radio" name="answer" value="add">Add<br>
-                  <input type="radio" name="answer" value="modify">Modify<br>
-                  <input type="radio" name="answer" value="delete">Delete<br>
-                  <input type="submit" value="Confirm">
-              </form>
-        <form action="FirstServlet" method="GET">
-            <input type="submit" value="Get all values" method="GET">
+        <form action="adverts" method="GET" >
+            <b>Marka:</b> <input type="text" name="brand" placeholder="Wpisz markę samochodu">
+            <b>Model:</b> <input type="text" name="model" placeholder="Wpisz model samochodu"><br><br>
+            <input type="submit" value="Szukaj" method="GET">
         </form>
-        
     </body>
 </html>
