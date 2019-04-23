@@ -45,9 +45,9 @@
              <tr>
                  <td>Samochód</td>
                  <td>
-                     <select>
+                     <select id="selectedCar" name="selectedCar">
                         <c:forEach var="car" items="${carList}">
-                                <option value="${car}">${car.brand} ${car.model}, ${car.fuelType} ${car.engineCapacity}</option>
+                                <option value="${car.idCar}">${car.brand} ${car.model}, ${car.fuelType} ${car.engineCapacity}</option>
                         </c:forEach>
                      </select>
                  </td>

@@ -68,7 +68,6 @@ public class AdvertsUpload extends HttpServlet {
         User user = (User) session.getAttribute("user");
         createAdvertisment(request, user);
         
-        
     }
     
     private void createAdvertisment(HttpServletRequest request, User user) throws IOException, ServletException {
@@ -80,6 +79,9 @@ public class AdvertsUpload extends HttpServlet {
         String vin = request.getParameter("VIN");
         //Part part = request.getPart("zdjecie");
         String description = request.getParameter("opis");
+        
+        int idCar = Integer.parseInt(request.getParameter("selectedCar"));
+        Car car = cardao.getCar(idCar);
       
         BufferedImage img = null;
                              
@@ -91,8 +93,7 @@ public class AdvertsUpload extends HttpServlet {
             Logger.getLogger(testMain.class.getName()).log(Level.SEVERE, null, ex);
         }
                
-        Car car1 = new Car(1, "BMW", "X5", 2015, "petrol", 2998.5, 263, 5);
-        Advertisment advertisment1 = new Advertisment(1,user,car1,mileage,demaged,vin,img,description,price);
+        Advertisment advertisment1 = new Advertisment(1,user,car,mileage,demaged,vin,img,description,price);
         addao.addAdvertisment(advertisment1);
         
        }
