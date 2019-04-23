@@ -16,7 +16,7 @@
         <form action="advertsUpload" method="POST"> 
         <table width="400px" align ="center" border= 2>
             <tr>
-                <td align = "center" colspan ="2"><font size="16">Ogłoszenie</font></td>
+                <td align = "center" colspan ="2"><font size="14">Dodaj ogoszenie</font></td>
             </tr>
             <tr>
                 <td>Cena (PLN)</td>
@@ -54,7 +54,7 @@
              </tr>
              <tr>
                  <td>Dodaj</td>
-                <td><input type="submit" value="Dodaj ogłoszenie" method="POST"/></td>
+                <td><input type="submit" value="Dodaj" method="POST"/></td>
              </tr>
              
         </table>

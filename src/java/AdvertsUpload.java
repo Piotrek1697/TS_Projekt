@@ -8,6 +8,7 @@ import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -41,12 +42,27 @@ public class AdvertsUpload extends HttpServlet {
     CarDAO cardao = new CarDAOImpl();
     UserDAO userdao = new UserDAOImpl();
     private AdvertismentDAO addao = new AdvertismentDAOImpl(cardao,userdao);
+    private Advertisment advertisment;
+    private Car car;
+    private int price; 
+    private int mileage;
+    private boolean demaged;
+    private String vin;
+    private String description; 
     
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        advertisment = null;
+        price = 0;
+        mileage = 0;
+        demaged = false;
+        vin = null;
+        description = null; 
+        car = null;
+        
         HttpSession session = request.getSession(true);
         User user = (User) session.getAttribute("user");
          if (user == null) {
@@ -66,37 +82,53 @@ public class AdvertsUpload extends HttpServlet {
         
         HttpSession session = request.getSession(true); 
         User user = (User) session.getAttribute("user");
-        createAdvertisment(request, user);
         
+        if(advertisment == null){
+        createAdvertisment(request, user);
+        response.sendRedirect("addImage.jsp");
+        }else{
+       // addImageToAdvertisment(request, user);
+        }
     }
     
     private void createAdvertisment(HttpServletRequest request, User user) throws IOException, ServletException {
-        LoadImage loadImage = new LoadImage();
-        
-        int price = Integer.parseInt(request.getParameter("cena"));
-        int mileage = Integer.parseInt(request.getParameter("przebieg"));
-        boolean demaged = request.getParameter( "uszkodzony" ) != null;
-        String vin = request.getParameter("VIN");
-        //Part part = request.getPart("zdjecie");
-        String description = request.getParameter("opis");
+       
+        price = Integer.parseInt(request.getParameter("cena"));
+        mileage = Integer.parseInt(request.getParameter("przebieg"));
+        demaged = request.getParameter( "uszkodzony" ) != null;
+        vin = request.getParameter("VIN");
+        description = request.getParameter("opis");
         
         int idCar = Integer.parseInt(request.getParameter("selectedCar"));
-        Car car = cardao.getCar(idCar);
+        car = cardao.getCar(idCar);
       
         BufferedImage img = null;
-                             
+        InputStream in = getClass().getResourceAsStream("brak.png");         
         try {
-            img = ImageIO.read(new File("C:\\Users\\Piotr Janus\\Documents\\GitHub\\TS_Projekt\\src\\java\\bmwx5.jpg"));
-            //img = ImageIO.read(new File(part.toString()));
-            img = loadImage.scaleImage(img);
+            img = LoadImage.read(in);
         } catch (IOException ex) {
             Logger.getLogger(testMain.class.getName()).log(Level.SEVERE, null, ex);
         }
                
-        Advertisment advertisment1 = new Advertisment(1,user,car,mileage,demaged,vin,img,description,price);
-        addao.addAdvertisment(advertisment1);
+        advertisment = new Advertisment(1,user,car,mileage,demaged,vin,img,description,price);
+        addao.addAdvertisment(advertisment);
         
        }
+    
+    private void addImageToAdvertisment(HttpServletRequest request,User user) throws IOException, ServletException{
+        BufferedImage img = null;
+        Part part = request.getPart("zdjecie");
+        
+        File temp = new File(part.toString());
+        String absolutePath = temp.getAbsolutePath();
+        System.out.println("File path : " + absolutePath);
+        
+        
+               
+        //advertisment = new Advertisment(1,user,car,mileage,demaged,vin,img,description,price);
+    }
+    
+    
     }
 
 
