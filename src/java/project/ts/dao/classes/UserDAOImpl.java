@@ -114,6 +114,26 @@ public class UserDAOImpl implements UserDAO {
 
         return listOfUsers;
     }
+    
+    public User getUserByLogin(String login, String password){
+        User user = null;
+        String sql = "SELECT * FROM uzytkownik WHERE login = '" + login + "'" + " AND haslo = '" + password + "';" ;
+        
+        try {
+            Connection connection = DbUtil.getIstance().getConnection();
+            ResultSet resultSet = connection.createStatement().executeQuery(sql);
+
+            while (resultSet.next()) {
+                user = wrapInUser(resultSet);
+            }
+            connection.close();
+            resultSet.close();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return user;
+    }
 
     @Override
     public void updateUser(User user) {

@@ -28,7 +28,13 @@
         </style>
     </head>
     <body>
-        <form action="adverts" method="GET" >
+        <form action="registration" method="GET">
+            <input type="submit" value="Zarejetruj się" method="GET" style="float: right;margin: 5px;">
+        </form>
+        <form action="login" method="GET">
+            <input type="submit" value="Zaloguj się" method="GET" style="float: right;margin: 5px;">
+        </form>
+        <form action="adverts" method="GET" style="margin: 5px" >
             <b>Marka:</b> <input type="text" name="brand" placeholder="Wpisz markę samochodu">
             <b>Model:</b> <input type="text" name="model" placeholder="Wpisz model samochodu"><br><br>
             <input type="submit" value="Szukaj" method="GET">
