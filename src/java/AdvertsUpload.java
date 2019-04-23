@@ -52,10 +52,10 @@ public class AdvertsUpload extends HttpServlet {
          if (user == null) {
             response.sendRedirect("login.jsp");
          } else {
-            request.getRequestDispatcher("advertsUpload.jsp").forward(request, response);
+            request.setAttribute("carList", cardao.getCars());
+            request.getRequestDispatcher("advertsUpload.jsp").forward(request, response);  
         }
            
-        
     }
 
    
@@ -66,7 +66,7 @@ public class AdvertsUpload extends HttpServlet {
         
         HttpSession session = request.getSession(true); 
         User user = (User) session.getAttribute("user");
-//        createAdvertisment(request, user);
+        createAdvertisment(request, user);
         
         
     }
@@ -84,7 +84,7 @@ public class AdvertsUpload extends HttpServlet {
         BufferedImage img = null;
                              
         try {
-            img = ImageIO.read(new File("C:\\Users\\Rozma\\Documents\\GitHub\\TS_Projekt\\src\\java\\bmwx5.jpg"));
+            img = ImageIO.read(new File("C:\\Users\\Piotr Janus\\Documents\\GitHub\\TS_Projekt\\src\\java\\bmwx5.jpg"));
             //img = ImageIO.read(new File(part.toString()));
             img = loadImage.scaleImage(img);
         } catch (IOException ex) {
@@ -92,7 +92,7 @@ public class AdvertsUpload extends HttpServlet {
         }
                
         Car car1 = new Car(1, "BMW", "X5", 2015, "petrol", 2998.5, 263, 5);
-        Advertisment advertisment1 = new Advertisment(1,user,car1,mileage,demaged,vin,img,description,3000);
+        Advertisment advertisment1 = new Advertisment(1,user,car1,mileage,demaged,vin,img,description,price);
         addao.addAdvertisment(advertisment1);
         
        }
