@@ -1,4 +1,5 @@
 
+import util.LoadImage;
 import db.DbUtil;
 import java.awt.image.BufferedImage;
 import java.io.File;
