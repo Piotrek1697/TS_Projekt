@@ -21,6 +21,7 @@ import java.io.File;
 import java.util.Iterator;
 import javax.imageio.*;
 import javax.imageio.stream.*;
+import javax.servlet.http.Part;
 
 /**
  *
@@ -28,6 +29,22 @@ import javax.imageio.stream.*;
  */
 public class LoadImage {
 
+    public String extractFileName(Part part){
+        
+        String contentDisp = part.getHeader("content-disposition");
+        String[] items = contentDisp.split(";");
+        for(String s : items){
+            if(s.trim().startsWith("filename")){
+                return s.substring(s.indexOf("-")+2, s.length() - 1);
+                
+            }
+        }
+            return "";
+        }
+    
+    
+    
+    
     public static BufferedImage readScaled(String path) throws IOException{
         return scaleImage(ImageIO.read(new File(path)));
     }
@@ -46,16 +63,12 @@ public class LoadImage {
         } else {
             scale = boundSize / origWidth;
         }
-        //* Don't scale up small images.
         if (scale > 1.0) {
             return (bufferedImage);
         }
         int scaledWidth = (int) (scale * origWidth);
         int scaledHeight = (int) (scale * origHeight);
         Image scaledImage = bufferedImage.getScaledInstance(scaledWidth, scaledHeight, Image.SCALE_SMOOTH);
-        // new ImageIcon(image); // load image
-        // scaledWidth = scaledImage.getWidth(null);
-        // scaledHeight = scaledImage.getHeight(null);
         BufferedImage scaledBI = new BufferedImage(scaledWidth, scaledHeight, BufferedImage.TYPE_INT_RGB);
         Graphics2D g = scaledBI.createGraphics();
         g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);

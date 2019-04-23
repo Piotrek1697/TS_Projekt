@@ -33,6 +33,7 @@ public class AdvertismentDAOImpl implements AdvertismentDAO {
 
     private CarDAO carDao;
     private UserDAO userDao;
+ 
 
     public AdvertismentDAOImpl(CarDAO cardao, UserDAO userdao) {
         this.carDao = cardao;

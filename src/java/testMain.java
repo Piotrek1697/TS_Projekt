@@ -39,8 +39,7 @@ public class testMain {
         UserDAO userdao = new UserDAOImpl();
         AdvertismentDAO addao = new AdvertismentDAOImpl(cardao,userdao);
         
-        /*
-        LoadImage loadImage = new LoadImage();
+       LoadImage loadImage = new LoadImage();
         BufferedImage bmw = null;
        
         try {
@@ -50,10 +49,10 @@ public class testMain {
             Logger.getLogger(testMain.class.getName()).log(Level.SEVERE, null, ex);
         }
         Advertisment advertisment1 = new Advertisment(1,user1,car1,50005,false,"437984738",bmw,null,3000);
-        Advertisment advertisment2 = new Advertisment(2,user3,car2,150005,true,"432294738",null,null,2000);
-        //addao.addAdvertisment(advertisment1);
-        */
-        System.out.println(userdao.getUserByLogin("Pjanus420","audir8"));
+//        Advertisment advertisment2 = new Advertisment(2,user3,car2,150005,true,"432294738",null,null,2000);
+        addao.addAdvertisment(advertisment1);
+        
+        // System.out.println(userdao.getUserByLogin("Pjanus420","audir8"));
         
         //addao.deleteAdvertisment(3);
         //addao.getAdvertisments();

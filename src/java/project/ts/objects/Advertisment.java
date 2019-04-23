@@ -34,6 +34,7 @@ public class Advertisment {
     private double price;
     private String base64Image;
 
+        
     public Advertisment(int idAdvertisment, User idUser, Car idCar, int carMileage, boolean demaged, String vin, BufferedImage image, String description, double price) {
         this.idAdvertisment = idAdvertisment;
         this.idUser = idUser;

@@ -39,5 +39,8 @@
             <b>Model:</b> <input type="text" name="model" placeholder="Wpisz model samochodu"><br><br>
             <input type="submit" value="Szukaj" method="GET">
         </form>
+         <form action="advertsUpload" method="GET" >
+            <input type="submit" value="Dodaj ogłoszenie" method="GET" >
+        </form>
     </body>
 </html>
