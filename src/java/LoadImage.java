@@ -10,8 +10,6 @@ import javax.imageio.ImageIO;
 import javax.imageio.ImageWriter;
 import javax.imageio.stream.FileImageOutputStream;
 
-
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -21,35 +19,46 @@ import java.io.File;
 import java.util.Iterator;
 import javax.imageio.*;
 import javax.imageio.stream.*;
+
 /**
  *
  * @author Rozma
  */
 public class LoadImage {
+
+    public static BufferedImage readScaled(String path) throws IOException{
+        return scaleImage(ImageIO.read(new File(path)));
+    }
     
- public BufferedImage scaleImage(BufferedImage bufferedImage) {
-            double boundSize = 1300;
-            int origWidth = bufferedImage.getWidth();
-            int origHeight = bufferedImage.getHeight();
-            double scale;
-            if (origHeight > origWidth)
-                scale = boundSize / origHeight;
-            else
-                scale = boundSize / origWidth;
-             //* Don't scale up small images.
-            if (scale > 1.0)
-                return (bufferedImage);
-            int scaledWidth = (int) (scale * origWidth);
-            int scaledHeight = (int) (scale * origHeight);
-            Image scaledImage = bufferedImage.getScaledInstance(scaledWidth, scaledHeight, Image.SCALE_SMOOTH);
-            // new ImageIcon(image); // load image
-            // scaledWidth = scaledImage.getWidth(null);
-            // scaledHeight = scaledImage.getHeight(null);
-            BufferedImage scaledBI = new BufferedImage(scaledWidth, scaledHeight, BufferedImage.TYPE_INT_RGB);
-            Graphics2D g = scaledBI.createGraphics();
-                 g.setRenderingHint(RenderingHints.KEY_INTERPOLATION,RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-            g.drawImage(scaledImage, 0, 0, null);
-            g.dispose();
-            return (scaledBI);
+    public static BufferedImage read(String path) throws IOException{
+        return ImageIO.read(new File(path));
+    }
+    
+    public static BufferedImage scaleImage(BufferedImage bufferedImage) {
+        double boundSize = 1300;
+        int origWidth = bufferedImage.getWidth();
+        int origHeight = bufferedImage.getHeight();
+        double scale;
+        if (origHeight > origWidth) {
+            scale = boundSize / origHeight;
+        } else {
+            scale = boundSize / origWidth;
+        }
+        //* Don't scale up small images.
+        if (scale > 1.0) {
+            return (bufferedImage);
+        }
+        int scaledWidth = (int) (scale * origWidth);
+        int scaledHeight = (int) (scale * origHeight);
+        Image scaledImage = bufferedImage.getScaledInstance(scaledWidth, scaledHeight, Image.SCALE_SMOOTH);
+        // new ImageIcon(image); // load image
+        // scaledWidth = scaledImage.getWidth(null);
+        // scaledHeight = scaledImage.getHeight(null);
+        BufferedImage scaledBI = new BufferedImage(scaledWidth, scaledHeight, BufferedImage.TYPE_INT_RGB);
+        Graphics2D g = scaledBI.createGraphics();
+        g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+        g.drawImage(scaledImage, 0, 0, null);
+        g.dispose();
+        return (scaledBI);
     }
 }

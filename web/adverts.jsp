@@ -19,8 +19,10 @@
                 margin: 20px;
                 padding: 20px;
             }
-            .split-para      { display:block;
-                              margin:0px;}
+            .split-para { 
+                display:block;
+                margin:0px;
+            }
             .split-para span { 
                 display:block;
                 float:right;

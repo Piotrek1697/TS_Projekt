@@ -39,7 +39,6 @@ public class AdvertServlet extends HttpServlet {
         request.setAttribute("advertList", advertDao.getBrandModalAdvertisment(brand, model));
         
         request.getRequestDispatcher("adverts.jsp").forward(request, response);
-        System.out.println("");
     }
 
     @Override
