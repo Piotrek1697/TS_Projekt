@@ -6,48 +6,19 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Logowanie</title>
-        <link href ="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
-        <style>
-            td{
-                padding: 10px;
-            }
-            div {
-                
-                width: 30%;
-                border: 1px solid black;
-                border-radius: 5px;
-                background-color: lightslategrey;
-            }
-            
-            
-        </style>
-    </head>
-    <body style = "background-color:#C9E0E1;">
-        
-        <form action="login" method="post">
-            <center><h1>Zaloguj się do serwisu</h1></center>
-            <center>
-            <div
-                <table
-                    <tr>
-                    <td>Login</td>
-                    <td><input type="text" class="form-control" name="userLogin" style="width: 300px" ></td>
-                    </tr>
-                    <tr>
-                    <td>Hasło</td>
-                    <td><input type="password" class="form-control" name="userPassword" style="width: 300px"></td>
-                    </tr>
-                    <tr>
-                        <td colspan ="2" style ="text-align: center"><input class = "btn btn-success " type="submit" value="Login" style="margin: 10px"></td>
-                    </tr>
-                
-                </table>
-            </div>
-            </center>
-        </form>
-    </body>
-</html>
+<html lang="en" dir="ltr">
+        <head>
+          <meta charset="utf-8">
+          <title>Logowanie</title>
+          <link rel="stylesheet" href="style.css">
+        </head>
+            <body>
+           <form class="box" action="login" method="post">
+                    <h1>Login</h1>
+                    <input type="text" name="userLogin" placeholder="użytkownik">
+                    <input type="password" name="userPassword" placeholder="hasło">
+                    <input type="submit" name="" value="Login">
+          </form>
+            </body>
+          </html>
+
