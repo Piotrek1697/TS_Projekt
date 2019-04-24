@@ -50,7 +50,7 @@
                                 <option value="${car.idCar}">${car.brand} ${car.model}, ${car.fuelType} ${car.engineCapacity}</option>
                         </c:forEach>
                                 <option selected="selected">
-                                    ${advert.idCar.idCar}
+                                    Wybierz
                                 </option>
                      </select>
                  </td>

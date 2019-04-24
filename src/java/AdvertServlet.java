@@ -36,10 +36,11 @@ public class AdvertServlet extends HttpServlet {
         String brand = request.getParameter("brand");
         String model = request.getParameter("model");
 
-        if (model != null) {
-            request.setAttribute("advertList", advertDao.getBrandModalAdvertisment(brand, model));
+        if (model == "") {
+            request.setAttribute("advertList", advertDao.getBrandAdvertisment(brand));
         } else {
-            //request.setAttribute("advertList", advertDao.getBrandAdvertisment(brand));
+
+            request.setAttribute("advertList", advertDao.getBrandModalAdvertisment(brand, model));
         }
         request.getRequestDispatcher("adverts.jsp").forward(request, response);
     }

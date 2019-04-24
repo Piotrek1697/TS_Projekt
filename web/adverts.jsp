@@ -26,7 +26,7 @@
             .split-para span { 
                 display:block;
                 float:right;
-                width:78%;
+                width:60%;
                 margin-left:0px;
                 margin-bottom: 0px;
             }

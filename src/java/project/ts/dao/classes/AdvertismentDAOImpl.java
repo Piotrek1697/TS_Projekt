@@ -183,8 +183,8 @@ public class AdvertismentDAOImpl implements AdvertismentDAO {
 
     @Override
     public List<Advertisment> getBrandAdvertisment(String brand) {
-        List<Advertisment> listOfBrandAdvertisment = new ArrayList();
-        String sql = "SELECT id_ogloszenie,uzytkownik,samochod,przebieg,uszkodzony,VIN,zdjecie,opis,cena FROM komis_samochodowy.ogloszenie INNER JOIN komis_samochodowy.samochod ON komis_samochodowy.ogloszenie.samochod = komis_samochodowy.samochod.id_samochod where marka= '" + brand + "';";
+       List<Advertisment> listOfBrandAdvertisment = new ArrayList();
+        String sql = "SELECT id_ogloszenie,uzytkownik,samochod,przebieg,uszkodzony,VIN,zdjecie,opis,cena FROM komis_samochodowy.ogloszenie INNER JOIN komis_samochodowy.samochod ON ogloszenie.samochod = samochod.id_samochod where marka= '" + brand + "';";
 
         try {
             Connection connection = DbUtil.getIstance().getConnection();
@@ -201,6 +201,7 @@ public class AdvertismentDAOImpl implements AdvertismentDAO {
         }
         return listOfBrandAdvertisment;
     }
+
 
     @Override
     public List<Advertisment> getBrandModalAdvertisment(String brand, String model) {

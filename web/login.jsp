@@ -17,7 +17,7 @@
             }
             div {
                 
-                width: 50%;
+                width: 30%;
                 border: 1px solid black;
                 border-radius: 5px;
                 background-color: lightslategrey;
@@ -26,19 +26,20 @@
             
         </style>
     </head>
-    <body>
-        <form action="login" method="post" style="margin: 10px" align="center">
+    <body style = "background-color:#C9E0E1;">
+        
+        <form action="login" method="post">
             <center><h1>Zaloguj się do serwisu</h1></center>
             <center>
             <div
                 <table
                     <tr>
                     <td>Login</td>
-                    <td><input type="text" class="form-control" name="userLogin"></td>
+                    <td><input type="text" class="form-control" name="userLogin" style="width: 300px" ></td>
                     </tr>
                     <tr>
                     <td>Hasło</td>
-                    <td><input type="password" class="form-control" name="userPassword"></td>
+                    <td><input type="password" class="form-control" name="userPassword" style="width: 300px"></td>
                     </tr>
                     <tr>
                         <td colspan ="2" style ="text-align: center"><input class = "btn btn-success " type="submit" value="Login" style="margin: 10px"></td>

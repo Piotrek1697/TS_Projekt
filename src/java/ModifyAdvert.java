@@ -63,17 +63,20 @@ public class ModifyAdvert extends HttpServlet {
         vin = request.getParameter("VIN");
         description = request.getParameter("opis");
         BufferedImage img = advertisment.getImage();
-        
-        int idCar = Integer.parseInt(request.getParameter("selectedCar"));
+        int idCar = 0;
+         
+        if(request.getParameter("selectedCar").equals("Wybierz")){
+        idCar = advertisment.getIdCar().getIdCar();
+            
+        }else{
+        idCar = Integer.parseInt(request.getParameter("selectedCar"));
+        }
         car = carDao.getCar(idCar);
-        
         HttpSession session = request.getSession(true);
         User user = (User) session.getAttribute("user");
         
         Advertisment advert = new Advertisment(advertisment.getIdAdvertisment(), user, car, mileage, demaged, vin, img, description, price);
         
-        System.out.println("ELO: "+advert);
-        System.out.println("ELO: "+img.getHeight());
         advertDao.updateAdvertisment(advert);
         
         response.sendRedirect("index.jsp");
