@@ -10,40 +10,31 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Wyszukaj samochód</title>
-        <style>
-            
-            ::-webkit-input-placeholder {
-                font-style: italic;
-            }
-            :-moz-placeholder {
-                font-style: italic;  
-            }
-            ::-moz-placeholder {
-                font-style: italic;  
-            }
-            :-ms-input-placeholder {  
-                font-style: italic; 
-            }
-
-        </style>
+        <link rel="stylesheet" href="indexStyle.css">
+ 
     </head>
     <body>
-        <form action="registration" method="GET">
-            <input type="submit" value="Zarejetruj się" method="GET" style="float: right;margin: 5px;">
-        </form>
-        <form action="login" method="GET">
-            <input type="submit" value="Zaloguj się" method="GET" style="float: right;margin: 5px;">
-        </form>
-        <form action="userAdverts" method="GET" >
-            <input type="submit" value="Moje ogloszenia" method="GET" style="float: right;margin: 5px;" >
+        
+        <form class="registrationButton" action="registration" method="GET">
+            <input type="submit" value="Zarejetruj się" method="GET">
         </form>
         
-        <form action="adverts" method="GET" style="margin: 5px" >
-            <b>Marka:</b> <input type="text" name="brand" placeholder="Wpisz markę samochodu">
-            <b>Model:</b> <input type="text" name="model" placeholder="Wpisz model samochodu"><br><br>
-            <input type="submit" value="Szukaj" method="GET">
+        <form class="loginButton" action="login" method="GET">
+            <input type="submit" value="Zaloguj się" method="GET">
         </form>
-         <form action="advertsUpload" method="GET" >
+        
+        <form  class="myAdverts"action="userAdverts" method="GET" >
+            <input type="submit" value="Moje ogloszenia" method="GET">
+        </form>
+        
+        <form class="box"action="adverts" method="GET">
+            <h1>Szukaj samochód</h1>
+                    <input type="text" name="brand" placeholder="Wpisz markę samochodu">
+                    <input type="text" name="model" placeholder="Wpisz model samochodu">
+                    <input type="submit" value="Szukaj" method="GET">
+                      
+        </form>
+         <form class="addAdvert" action="advertsUpload" method="GET" >
             <input type="submit" value="Dodaj ogłoszenie" method="GET" >
         </form>
         

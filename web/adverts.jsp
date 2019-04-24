@@ -12,6 +12,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Ogloszenia samochodowe</title>
+        <link rel="stylesheet" href="advertStyle.css">
         <style>
             .advert {
                 background-color: black;
