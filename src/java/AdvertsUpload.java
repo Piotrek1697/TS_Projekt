@@ -49,7 +49,7 @@ public class AdvertsUpload extends HttpServlet {
     private AdvertismentDAO addao = new AdvertismentDAOImpl(cardao, userdao);
     private Advertisment advertisment;
     private Car car;
-    private int price;
+    private double price;
     private int mileage;
     private boolean demaged;
     private String vin;
@@ -107,7 +107,7 @@ public class AdvertsUpload extends HttpServlet {
 
     private int createAdvertisment(HttpServletRequest request, User user) throws IOException, ServletException {
 
-        price = Integer.parseInt(request.getParameter("cena"));
+        price = Double.parseDouble(request.getParameter("cena"));
         mileage = Integer.parseInt(request.getParameter("przebieg"));
         demaged = request.getParameter("uszkodzony") != null;
         vin = request.getParameter("VIN");
@@ -134,12 +134,8 @@ public class AdvertsUpload extends HttpServlet {
         BufferedImage img = null;
 
         Part part = request.getPart("zdjecie");
-        String filename = part.getSubmittedFileName();
-        System.out.println("elko " + filename);
-        System.out.println("ID2 " + id);
         try {
-            img = ImageIO.read(new File(filename));
-            img = LoadImage.scaleImage(img);
+            img = LoadImage.readScaled(part.getInputStream());
         } catch (IOException ex) {
             Logger.getLogger(testMain.class.getName()).log(Level.SEVERE, null, ex);
         }

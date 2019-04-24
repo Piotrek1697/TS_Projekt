@@ -181,7 +181,7 @@ public class Advertisment {
 
     @Override
     public String toString() {
-        return "Advertisment{" + "idAdvertisment=" + idAdvertisment + ", idUser=" + idUser + ", idCar=" + idCar + ", carMileage=" + carMileage + ", demaged=" + demaged + ", vin=" + vin + ", image=" + image + ", description=" + description + ", price=" + price + ", base64Image=" + base64Image + '}';
+        return "Advertisment{" + "idAdvertisment=" + idAdvertisment + ", idUser=" + idUser + ", idCar=" + idCar + ", carMileage=" + carMileage + ", demaged=" + demaged + ", vin=" + vin + ", description=" + description + ", price=" + price + '}';
     }
     
     

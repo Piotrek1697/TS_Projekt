@@ -121,6 +121,25 @@ public class AdvertismentDAOImpl implements AdvertismentDAO {
 
         return advertisment;
     }
+    
+    @Override
+    public Advertisment getAdvertisment(int idAdvert) {
+        String sql = "select * from komis_samochodowy.ogloszenie where id_ogloszenie = '"+ idAdvert +"';";
+        Advertisment advertisment = null;
+        try {
+            Connection connection = DbUtil.getIstance().getConnection();
+            ResultSet resultSet = connection.createStatement().executeQuery(sql);
+            while (resultSet.next()) {
+                advertisment = wrapInAdvertisment(resultSet);
+            }
+            connection.close();
+            resultSet.close();
+        } catch (SQLException | IOException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return advertisment;
+    }
 
     @Override
     public List<Advertisment> getAdvertisments() {
@@ -165,7 +184,7 @@ public class AdvertismentDAOImpl implements AdvertismentDAO {
     @Override
     public List<Advertisment> getBrandAdvertisment(String brand) {
         List<Advertisment> listOfBrandAdvertisment = new ArrayList();
-        String sql = "SELECT id_ogloszenie,samochod,uzytkownik,przebieg,uszkodzony,VIN,zdjecie,opis,cena FROM ogloszenie right JOIN samochod ON ogloszenie.samochod = samochod.id_samochod where marka= '" + brand + "';";
+        String sql = "SELECT id_ogloszenie,uzytkownik,samochod,przebieg,uszkodzony,VIN,zdjecie,opis,cena FROM komis_samochodowy.ogloszenie INNER JOIN komis_samochodowy.samochod ON komis_samochodowy.ogloszenie.samochod = komis_samochodowy.samochod.id_samochod where marka= '" + brand + "';";
 
         try {
             Connection connection = DbUtil.getIstance().getConnection();
@@ -186,8 +205,28 @@ public class AdvertismentDAOImpl implements AdvertismentDAO {
     @Override
     public List<Advertisment> getBrandModalAdvertisment(String brand, String model) {
         List<Advertisment> listOfBrandModelAdvertisment = new ArrayList();
-        String sql = "SELECT id_ogloszenie,samochod,uzytkownik,przebieg,uszkodzony,VIN,zdjecie,opis,cena FROM ogloszenie right JOIN samochod ON ogloszenie.samochod = samochod.id_samochod where marka = '" + brand + "' AND model = '" + model + "';";
+        String sql = "SELECT id_ogloszenie,uzytkownik,samochod,przebieg,uszkodzony,VIN,zdjecie,opis,cena FROM ogloszenie INNER JOIN samochod ON ogloszenie.samochod = samochod.id_samochod where marka = '" + brand + "' AND model = '" + model + "';";
 
+        try {
+            Connection connection = DbUtil.getIstance().getConnection();
+            ResultSet resultSet = connection.createStatement().executeQuery(sql);
+            while (resultSet.next()) {
+                listOfBrandModelAdvertisment.add(wrapInAdvertisment(resultSet));
+            }
+            connection.close();
+            resultSet.close();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } catch (IOException ex) {
+            Logger.getLogger(AdvertismentDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listOfBrandModelAdvertisment;
+    }
+
+    @Override
+    public List<Advertisment> getUserAdverts(int idUser) {
+        List<Advertisment> listOfBrandModelAdvertisment = new ArrayList();
+        String sql = "SELECT id_ogloszenie,uzytkownik,samochod,przebieg,uszkodzony,VIN,zdjecie,opis,cena from komis_samochodowy.ogloszenie inner join komis_samochodowy.uzytkownik on komis_samochodowy.uzytkownik.id_uzytkownik = komis_samochodowy.ogloszenie.uzytkownik where komis_samochodowy.uzytkownik.id_uzytkownik = '"+idUser+"';";
         try {
             Connection connection = DbUtil.getIstance().getConnection();
             ResultSet resultSet = connection.createStatement().executeQuery(sql);

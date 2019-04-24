@@ -41,7 +41,7 @@ public class testMain {
         
        LoadImage loadImage = new LoadImage();
         BufferedImage bmw = null;
-       
+       /*
         try {
             bmw = ImageIO.read(new File("C:\\Users\\Rozma\\Documents\\GitHub\\TS_Projekt\\src\\java\\bmwx5.jpg"));
             bmw = loadImage.scaleImage(bmw);
@@ -49,11 +49,13 @@ public class testMain {
             Logger.getLogger(testMain.class.getName()).log(Level.SEVERE, null, ex);
         }
         Advertisment advertisment1 = new Advertisment(55,user1,car1,50005,false,"437984738",bmw,null,88888);
+*/
 //        Advertisment advertisment2 = new Advertisment(2,user3,car2,150005,true,"432294738",null,null,2000);
         //addao.addAdvertisment(advertisment1);
-        addao.updateAdvertisment(advertisment1);
+        //addao.updateAdvertisment(advertisment1);
         // System.out.println(userdao.getUserByLogin("Pjanus420","audir8"));
         
+        System.out.println(addao.getBrandModalAdvertisment("Audi", "R8"));
         //addao.deleteAdvertisment(3);
         //addao.getAdvertisments();
         //System.out.println(userdao.getUsers());
