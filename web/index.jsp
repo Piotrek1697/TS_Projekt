@@ -34,10 +34,19 @@
         <form action="login" method="GET">
             <input type="submit" value="Zaloguj się" method="GET" style="float: right;margin: 5px;">
         </form>
+        <form action="userAdverts" method="GET" >
+            <input type="submit" value="Moje ogloszenia" method="GET" style="float: right;margin: 5px;" >
+        </form>
+        
         <form action="adverts" method="GET" style="margin: 5px" >
             <b>Marka:</b> <input type="text" name="brand" placeholder="Wpisz markę samochodu">
             <b>Model:</b> <input type="text" name="model" placeholder="Wpisz model samochodu"><br><br>
             <input type="submit" value="Szukaj" method="GET">
         </form>
+         <form action="advertsUpload" method="GET" >
+            <input type="submit" value="Dodaj ogłoszenie" method="GET" >
+        </form>
+        
+        
     </body>
 </html>

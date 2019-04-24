@@ -16,7 +16,7 @@ public interface AdvertismentDAO {
     
    void addAdvertisment (Advertisment advertisment);
     
-    Advertisment getAdvertisment(int idAdvertisment);
+    Advertisment getAdvertisment(Advertisment advertisment);
     
     List<Advertisment> getAdvertisments();
     
@@ -28,5 +28,8 @@ public interface AdvertismentDAO {
     
     List<Advertisment> getBrandModalAdvertisment(String brand, String model);
     
+    List<Advertisment> getUserAdverts(int idUser);
+    
+    Advertisment getAdvertisment(int idAdvert);
     
 }

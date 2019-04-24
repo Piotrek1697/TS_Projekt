@@ -34,6 +34,7 @@ public class Advertisment {
     private double price;
     private String base64Image;
 
+        
     public Advertisment(int idAdvertisment, User idUser, Car idCar, int carMileage, boolean demaged, String vin, BufferedImage image, String description, double price) {
         this.idAdvertisment = idAdvertisment;
         this.idUser = idUser;
@@ -176,6 +177,11 @@ public class Advertisment {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Advertisment{" + "idAdvertisment=" + idAdvertisment + ", idUser=" + idUser + ", idCar=" + idCar + ", carMileage=" + carMileage + ", demaged=" + demaged + ", vin=" + vin + ", description=" + description + ", price=" + price + '}';
     }
     
     

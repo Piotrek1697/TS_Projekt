@@ -24,6 +24,7 @@ import project.ts.dao.interfaces.CarDAO;
 import project.ts.dao.interfaces.UserDAO;
 import project.ts.objects.Advertisment;
 import project.ts.objects.Car;
+import project.ts.objects.User;
 
 /**
  *
@@ -33,6 +34,7 @@ public class AdvertismentDAOImpl implements AdvertismentDAO {
 
     private CarDAO carDao;
     private UserDAO userDao;
+ 
 
     public AdvertismentDAOImpl(CarDAO cardao, UserDAO userdao) {
         this.carDao = cardao;
@@ -70,8 +72,8 @@ public class AdvertismentDAOImpl implements AdvertismentDAO {
 
     private void preparedAdvertisment(PreparedStatement prepStat, Advertisment advertisment) throws SQLException, IOException {
 
-        prepStat.setInt(1, advertisment.getIdCar().getIdCar()); //idCar to po prostu obiekt CAR. User to samo
-        prepStat.setInt(2, advertisment.getIdUser().getIdUser());
+        prepStat.setInt(1, advertisment.getIdUser().getIdUser());
+        prepStat.setInt(2, advertisment.getIdCar().getIdCar()); 
         prepStat.setInt(3, advertisment.getCarMileage());
         prepStat.setBoolean(4, advertisment.isDemaged());
         prepStat.setString(5, advertisment.getVin());
@@ -102,10 +104,28 @@ public class AdvertismentDAOImpl implements AdvertismentDAO {
     }
 
     @Override
-    public Advertisment getAdvertisment(int idAdvertisment) {
-        Advertisment advertisment = null;
-        String sql = "SELECT * FROM ogloszenie WHERE id_ogloszenie = '" + idAdvertisment + "';";
+    public Advertisment getAdvertisment(Advertisment advertisment) {
+        String sql = "select * from komis_samochodowy.ogloszenie where samochod = '"+ advertisment.getIdCar().getIdCar()+"' and uzytkownik ='"+ advertisment.getIdUser().getIdUser() +"' and vin = '"+ advertisment.getVin()+"';";
 
+        try {
+            Connection connection = DbUtil.getIstance().getConnection();
+            ResultSet resultSet = connection.createStatement().executeQuery(sql);
+            while (resultSet.next()) {
+                advertisment = wrapInAdvertisment(resultSet);
+            }
+            connection.close();
+            resultSet.close();
+        } catch (SQLException | IOException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return advertisment;
+    }
+    
+    @Override
+    public Advertisment getAdvertisment(int idAdvert) {
+        String sql = "select * from komis_samochodowy.ogloszenie where id_ogloszenie = '"+ idAdvert +"';";
+        Advertisment advertisment = null;
         try {
             Connection connection = DbUtil.getIstance().getConnection();
             ResultSet resultSet = connection.createStatement().executeQuery(sql);
@@ -143,7 +163,7 @@ public class AdvertismentDAOImpl implements AdvertismentDAO {
 
     @Override
     public void updateAdvertisment(Advertisment advertisment) {
-        String sql = "UPDATE ogloszenie SET samochod = ?,uzytkownik = ?,przebieg = ?,uszkodzony = ?, VIN = ?, zdjecie = ?, opis = ?, cena = ? WHERE id_ogloszenie = '" + advertisment.getIdAdvertisment() + "';";
+        String sql = "UPDATE ogloszenie SET uzytkownik = ?,samochod = ?,przebieg = ?,uszkodzony = ?, VIN = ?, zdjecie = ?, opis = ?, cena = ? WHERE id_ogloszenie = '" + advertisment.getIdAdvertisment() + "';";
 
         try {
             Connection connection = DbUtil.getIstance().getConnection();
@@ -163,8 +183,8 @@ public class AdvertismentDAOImpl implements AdvertismentDAO {
 
     @Override
     public List<Advertisment> getBrandAdvertisment(String brand) {
-        List<Advertisment> listOfBrandAdvertisment = new ArrayList();
-        String sql = "SELECT id_ogloszenie,samochod,uzytkownik,przebieg,uszkodzony,VIN,zdjecie,opis,cena FROM ogloszenie right JOIN samochod ON ogloszenie.samochod = samochod.id_samochod where marka= '" + brand + "';";
+       List<Advertisment> listOfBrandAdvertisment = new ArrayList();
+        String sql = "SELECT id_ogloszenie,uzytkownik,samochod,przebieg,uszkodzony,VIN,zdjecie,opis,cena FROM komis_samochodowy.ogloszenie INNER JOIN komis_samochodowy.samochod ON ogloszenie.samochod = samochod.id_samochod where marka= '" + brand + "';";
 
         try {
             Connection connection = DbUtil.getIstance().getConnection();
@@ -182,11 +202,32 @@ public class AdvertismentDAOImpl implements AdvertismentDAO {
         return listOfBrandAdvertisment;
     }
 
+
     @Override
     public List<Advertisment> getBrandModalAdvertisment(String brand, String model) {
         List<Advertisment> listOfBrandModelAdvertisment = new ArrayList();
-        String sql = "SELECT id_ogloszenie,samochod,uzytkownik,przebieg,uszkodzony,VIN,zdjecie,opis,cena FROM ogloszenie right JOIN samochod ON ogloszenie.samochod = samochod.id_samochod where marka = '" + brand + "' AND model = '" + model + "';";
+        String sql = "SELECT id_ogloszenie,uzytkownik,samochod,przebieg,uszkodzony,VIN,zdjecie,opis,cena FROM ogloszenie INNER JOIN samochod ON ogloszenie.samochod = samochod.id_samochod where marka = '" + brand + "' AND model = '" + model + "';";
 
+        try {
+            Connection connection = DbUtil.getIstance().getConnection();
+            ResultSet resultSet = connection.createStatement().executeQuery(sql);
+            while (resultSet.next()) {
+                listOfBrandModelAdvertisment.add(wrapInAdvertisment(resultSet));
+            }
+            connection.close();
+            resultSet.close();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } catch (IOException ex) {
+            Logger.getLogger(AdvertismentDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listOfBrandModelAdvertisment;
+    }
+
+    @Override
+    public List<Advertisment> getUserAdverts(int idUser) {
+        List<Advertisment> listOfBrandModelAdvertisment = new ArrayList();
+        String sql = "SELECT id_ogloszenie,uzytkownik,samochod,przebieg,uszkodzony,VIN,zdjecie,opis,cena from komis_samochodowy.ogloszenie inner join komis_samochodowy.uzytkownik on komis_samochodowy.uzytkownik.id_uzytkownik = komis_samochodowy.ogloszenie.uzytkownik where komis_samochodowy.uzytkownik.id_uzytkownik = '"+idUser+"';";
         try {
             Connection connection = DbUtil.getIstance().getConnection();
             ResultSet resultSet = connection.createStatement().executeQuery(sql);
