@@ -10,14 +10,43 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Logowanie</title>
+        <link href ="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+        <style>
+            td{
+                padding: 10px;
+            }
+            div {
+                
+                width: 50%;
+                border: 1px solid black;
+                border-radius: 5px;
+                background-color: lightslategrey;
+            }
+            
+            
+        </style>
     </head>
     <body>
-        <h1 align="center">Zaloguj się do serwisu</h1>
         <form action="login" method="post" style="margin: 10px" align="center">
-            Login: <input type="text" name="userLogin"><br>
-            Hasło: <input type="password" name="userPassword"><br>
-            
-            <input type="submit" value="Login" style="margin: 10px">
+            <center><h1>Zaloguj się do serwisu</h1></center>
+            <center>
+            <div
+                <table
+                    <tr>
+                    <td>Login</td>
+                    <td><input type="text" class="form-control" name="userLogin"></td>
+                    </tr>
+                    <tr>
+                    <td>Hasło</td>
+                    <td><input type="password" class="form-control" name="userPassword"></td>
+                    </tr>
+                    <tr>
+                        <td colspan ="2" style ="text-align: center"><input class = "btn btn-success " type="submit" value="Login" style="margin: 10px"></td>
+                    </tr>
+                
+                </table>
+            </div>
+            </center>
         </form>
     </body>
 </html>
