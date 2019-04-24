@@ -23,7 +23,7 @@
            </tr>
            <tr>
                  <td></td>
-                <td><input type="submit" value="Dodaj" method="POST"/></td>
+                <td><input type="submit" value="Dalej" method="POST"/></td>
             </tr>
           </table>
         </form>

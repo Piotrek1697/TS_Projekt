@@ -16,7 +16,7 @@ public interface AdvertismentDAO {
     
    void addAdvertisment (Advertisment advertisment);
     
-    Advertisment getAdvertisment(int idAdvertisment);
+    Advertisment getAdvertisment(Advertisment advertisment);
     
     List<Advertisment> getAdvertisments();
     

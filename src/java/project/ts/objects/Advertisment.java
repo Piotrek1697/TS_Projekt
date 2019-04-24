@@ -178,6 +178,11 @@ public class Advertisment {
         }
         return true;
     }
+
+    @Override
+    public String toString() {
+        return "Advertisment{" + "idAdvertisment=" + idAdvertisment + ", idUser=" + idUser + ", idCar=" + idCar + ", carMileage=" + carMileage + ", demaged=" + demaged + ", vin=" + vin + ", image=" + image + ", description=" + description + ", price=" + price + ", base64Image=" + base64Image + '}';
+    }
     
     
     

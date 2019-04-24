@@ -73,7 +73,7 @@ public class AdvertismentDAOImpl implements AdvertismentDAO {
     private void preparedAdvertisment(PreparedStatement prepStat, Advertisment advertisment) throws SQLException, IOException {
 
         prepStat.setInt(1, advertisment.getIdUser().getIdUser());
-        prepStat.setInt(2, advertisment.getIdCar().getIdCar()); //idCar to po prostu obiekt CAR. User to samo
+        prepStat.setInt(2, advertisment.getIdCar().getIdCar()); 
         prepStat.setInt(3, advertisment.getCarMileage());
         prepStat.setBoolean(4, advertisment.isDemaged());
         prepStat.setString(5, advertisment.getVin());
@@ -104,9 +104,8 @@ public class AdvertismentDAOImpl implements AdvertismentDAO {
     }
 
     @Override
-    public Advertisment getAdvertisment(int idAdvertisment) {
-        Advertisment advertisment = null;
-        String sql = "SELECT * FROM ogloszenie WHERE id_ogloszenie = '" + idAdvertisment + "';";
+    public Advertisment getAdvertisment(Advertisment advertisment) {
+        String sql = "select * from komis_samochodowy.ogloszenie where samochod = '"+ advertisment.getIdCar().getIdCar()+"' and uzytkownik ='"+ advertisment.getIdUser().getIdUser() +"' and vin = '"+ advertisment.getVin()+"';";
 
         try {
             Connection connection = DbUtil.getIstance().getConnection();
@@ -145,7 +144,7 @@ public class AdvertismentDAOImpl implements AdvertismentDAO {
 
     @Override
     public void updateAdvertisment(Advertisment advertisment) {
-        String sql = "UPDATE ogloszenie SET samochod = ?,uzytkownik = ?,przebieg = ?,uszkodzony = ?, VIN = ?, zdjecie = ?, opis = ?, cena = ? WHERE id_ogloszenie = '" + advertisment.getIdAdvertisment() + "';";
+        String sql = "UPDATE ogloszenie SET uzytkownik = ?,samochod = ?,przebieg = ?,uszkodzony = ?, VIN = ?, zdjecie = ?, opis = ?, cena = ? WHERE id_ogloszenie = '" + advertisment.getIdAdvertisment() + "';";
 
         try {
             Connection connection = DbUtil.getIstance().getConnection();
