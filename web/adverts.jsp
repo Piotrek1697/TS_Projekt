@@ -17,7 +17,7 @@
     </head>
     <body>
         <a href="index.jsp" class="back">Powrót do strony głównej</a>
-        <h1>Ogłoszenia</h1>
+        <h1 class = "text">Ogłoszenia</h1>
         <c:forEach var="advert" items="${advertList}">
             <div class="advert">
                 <h2 class="split-para"><c:out value="${advert.idCar.brand}"/>  <c:out value="${advert.idCar.model}"/>  

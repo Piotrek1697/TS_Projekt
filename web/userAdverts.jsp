@@ -10,32 +10,13 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Twoje ogloszenia</title>
-        <link rel="stylesheet" href="advertStyle.css">
-        <style>
-            .advert {
-                background-color: black;
-                color: white;
-                margin: 20px;
-                padding: 20px;
-            }
-            .split-para { 
-                display:block;
-                margin:0px;
-            }
-            .split-para span { 
-                display:block;
-                float:right;
-                width:60%;
-                margin-left:0px;
-                margin-bottom: 0px;
-            }
-        </style>
-        
+        <link rel="stylesheet" href="advertDisplayStyle.css">
+               
     </head>
     <body>
-        <a href="index.jsp" style="float: right;margin: 5px;">Powrót do strony głównej</a>
-        <h1>Ogłoszenia użytkownika</h1>
-        <h2><c:set var="user" value="${user}"/>
+        <a href="index.jsp" class="back">Powrót do strony głównej</a>
+        <h1 class = "text">Ogłoszenia użytkownika</h1>
+        <h2 class = "text2"><c:set var="user" value="${user}"/>
             <c:out value="${user.name}"/> <c:out value="${user.surname}"/>, <c:out value="${user.login}"/>
         </h2>
         <c:forEach var="advert" items="${advertList}">
