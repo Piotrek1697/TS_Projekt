@@ -59,8 +59,8 @@ body{
   border:0;
   background: none;
   width: 250px;
-  margin-left: 220px;
-  margin-top: 10px;
+  margin-left: 41%;
+  margin-top: 0.5%;
   text-align: center;
   border: 2px solid #191919;
   padding: 14px 40px;
@@ -80,8 +80,8 @@ body{
   background: none;
   display: block;
   width: 250px;
-  margin-left: 220px;
-  margin-top: 10px;
+  margin-left: 41%;
+  margin-top: 31.5%;
   text-align: center;
   border: 2px solid #191919;
   padding: 14px 40px;
@@ -100,8 +100,8 @@ body{
   border:0;
   background: none;
   display: block;
-  margin-top: 140px;
-  margin-left: 880px;
+  margin-top: 0.5%;
+  margin-left: 86%;
   width: 150px;
   text-align: center;
   border: 2px solid #191919;
@@ -120,9 +120,9 @@ body{
   border:0;
   background: none;
   display: block;
-  margin-top: 10px;
+  margin-top: 0.5%;
   width: 150px;
-  margin-left: 880px;
+  margin-left: 86%;
   text-align: center;
   border: 2px solid #191919;
   padding: 14px 40px;
