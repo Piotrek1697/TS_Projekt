@@ -30,6 +30,7 @@
                 <p><c:out value="${advert.carMileage} km"/></p>
                 <h3><c:out value="${advert.price} zł"/></h3>
                 <h4>VIN: <c:out value="${advert.vin}"/></h4>
+                <h5>Opis: <c:out value="${advert.description}"/></h5>
                <br>
             </div>
         </c:forEach>
