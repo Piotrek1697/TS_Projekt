@@ -1,0 +1,48 @@
+body{
+  margin: 4;
+  margin-top: 2%;
+  padding: 0;
+  font-family: sans-serif;
+  background: #34495e;
+}
+
+a{
+    text-decoration: inherit;
+ }
+
+.back {
+  border:0;
+  background: none;
+  width: 250px;
+  margin-left: 78%;
+  text-align: center;
+  border: 2px solid #191919;
+  padding: 14px 40px;
+  outline: none;
+  color: white;
+  border-radius: 24px;
+  transition: 0.25s;
+  cursor: pointer;
+}
+
+.back:hover{
+  background: #2ecc71;
+}
+
+  .advert {
+                background-color: black;
+                color: white;
+                margin: 20px;
+                padding: 20px;
+}
+ .split-para { 
+                display:block;
+                margin:0px;
+}
+.split-para span { 
+                display:block;
+                float:right;
+                width:60%;
+                margin-left:0px;
+                margin-bottom: 0px;
+}

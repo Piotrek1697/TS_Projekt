@@ -12,29 +12,11 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Ogloszenia samochodowe</title>
-        <link rel="stylesheet" href="advertStyle.css">
-        <style>
-            .advert {
-                background-color: black;
-                color: white;
-                margin: 20px;
-                padding: 20px;
-            }
-            .split-para { 
-                display:block;
-                margin:0px;
-            }
-            .split-para span { 
-                display:block;
-                float:right;
-                width:60%;
-                margin-left:0px;
-                margin-bottom: 0px;
-            }
-        </style>
+        <link rel="stylesheet" href="advertDisplayStyle.css">
+        
     </head>
     <body>
-        <a href="index.jsp" style="float: right;margin: 5px;">Powrót do strony głównej</a>
+        <a href="index.jsp" class="back">Powrót do strony głównej</a>
         <h1>Ogłoszenia</h1>
         <c:forEach var="advert" items="${advertList}">
             <div class="advert">
