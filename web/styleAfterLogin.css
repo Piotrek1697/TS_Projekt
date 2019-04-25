@@ -1,0 +1,37 @@
+body{
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  background: #34495e;
+  text-align: center;
+}
+a{
+    text-decoration: inherit;
+ }
+
+ .clickButton{
+     color: #31A6FF;
+     font-family: "proxima nova";
+     font-weight: 100;
+     font-size: 34px;
+     text-align: center;
+     
+     
+     border: solid 2px #31A6FF;
+     border-radius: 50px;
+     padding: 10px 80px;
+     
+     -webkit-transition-duration: 200ms;
+     transition-duration: 200ms;
+     
+ }
+ .clickButton:hover{
+     background-color: #191919;
+     color: #fff;
+    
+     
+ }
+ .text{
+     text-align: left;
+     margin-left: 5%;
+ }

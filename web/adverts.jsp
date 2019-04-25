@@ -12,29 +12,12 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Ogloszenia samochodowe</title>
-        <style>
-            .advert {
-                background-color: black;
-                color: white;
-                margin: 20px;
-                padding: 20px;
-            }
-            .split-para { 
-                display:block;
-                margin:0px;
-            }
-            .split-para span { 
-                display:block;
-                float:right;
-                width:60%;
-                margin-left:0px;
-                margin-bottom: 0px;
-            }
-        </style>
+        <link rel="stylesheet" href="advertDisplayStyle.css">
+        
     </head>
     <body>
-        <a href="index.jsp" style="float: right;margin: 5px;">Powrót do strony głównej</a>
-        <h1>Ogłoszenia</h1>
+        <a href="index.jsp" class="back">Powrót do strony głównej</a>
+        <h1 class = "text">Ogłoszenia</h1>
         <c:forEach var="advert" items="${advertList}">
             <div class="advert">
                 <h2 class="split-para"><c:out value="${advert.idCar.brand}"/>  <c:out value="${advert.idCar.model}"/>  
@@ -47,6 +30,7 @@
                 <p><c:out value="${advert.carMileage} km"/></p>
                 <h3><c:out value="${advert.price} zł"/></h3>
                 <h4>VIN: <c:out value="${advert.vin}"/></h4>
+                <h5>Opis: <c:out value="${advert.description}"/></h5>
                <br>
             </div>
         </c:forEach>
