@@ -5,3 +5,7 @@ Po zalogowaniu użytkownik ma możliwość dodawania, usuwania lub modyfikacji w
 Program obsługuje bazę danych przy pomocy wzorca projektowego DAO. Wygląd został napisany w CSS.
 
 ![alt text](https://github.com/Piotrek1697/TS_Projekt/blob/master/Images/img1.PNG)
+![alt text](https://github.com/Piotrek1697/TS_Projekt/blob/master/Images/img2.PNG)
+![alt text](https://github.com/Piotrek1697/TS_Projekt/blob/master/Images/img3.PNG)
+![alt text](https://github.com/Piotrek1697/TS_Projekt/blob/master/Images/img4.PNG)
+![alt text](https://github.com/Piotrek1697/TS_Projekt/blob/master/Images/img5.PNG)
